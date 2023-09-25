@@ -10,5 +10,14 @@
     <Compile Update="EspecialidadForm\UpdateEspecialidad.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="PlanForm\AltaPlan.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="PlanForm\UpdatePlan.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="PlanForm\ListadoPlan.cs">
+      <SubType>Form</SubType>
+    </Compile>
   </ItemGroup>
 </Project>

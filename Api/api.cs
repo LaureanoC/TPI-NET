@@ -158,6 +158,7 @@ app.MapPut("/planes/{id}", async (int id, Plan p, UniversidadContext context) =>
     if (pl is null) return Results.NotFound();
 
     pl.Descripcion = p.Descripcion;
+    pl.IdEspecialidad = p.IdEspecialidad;
 
     await context.SaveChangesAsync();
     return Results.NoContent();

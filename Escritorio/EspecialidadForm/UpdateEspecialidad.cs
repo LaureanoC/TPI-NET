@@ -41,5 +41,10 @@ namespace Escritorio.Especialidad
 
             this.Dispose();
         }
+
+        private void UpdateEspecialidad_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

@@ -20,3 +20,6 @@ C:\Users\Usuario\Desktop\Laureano\Universidad\2023\Tecnología de desarrollo IDE
 C:\Users\Usuario\Desktop\Laureano\Universidad\2023\Tecnología de desarrollo IDE (elect)\TPI\Escritorio\obj\Debug\net6.0-windows\ref\Escritorio.dll
 C:\Users\Usuario\Desktop\Laureano\Universidad\2023\Tecnología de desarrollo IDE (elect)\TPI\Escritorio\obj\Debug\net6.0-windows\Escritorio.Especialidad.ListadoEspecialidadForm.resources
 C:\Users\Usuario\Desktop\Laureano\Universidad\2023\Tecnología de desarrollo IDE (elect)\TPI\Escritorio\obj\Debug\net6.0-windows\Escritorio.Especialidad.UpdateEspecialidad.resources
+C:\Users\Usuario\Desktop\Laureano\Universidad\2023\Tecnología de desarrollo IDE (elect)\TPI\Escritorio\obj\Debug\net6.0-windows\Escritorio.PlanForm.ListadoPlanForm.resources
+C:\Users\Usuario\Desktop\Laureano\Universidad\2023\Tecnología de desarrollo IDE (elect)\TPI\Escritorio\obj\Debug\net6.0-windows\Escritorio.PlanForm.AltaPlanForm.resources
+C:\Users\Usuario\Desktop\Laureano\Universidad\2023\Tecnología de desarrollo IDE (elect)\TPI\Escritorio\obj\Debug\net6.0-windows\Escritorio.PlanForm.UpdatePlan.resources

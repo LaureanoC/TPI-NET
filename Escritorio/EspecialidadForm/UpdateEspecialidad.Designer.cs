@@ -80,6 +80,7 @@
             Controls.Add(inputDesc);
             Name = "UpdateEspecialidad";
             Text = "Academia";
+            Load += UpdateEspecialidad_Load;
             ResumeLayout(false);
             PerformLayout();
         }

@@ -107,7 +107,7 @@ app.MapPut("/especialidades/{id}", async (int id, Especialidad p, UniversidadCon
 
     if (e is null) return Results.NotFound();
 
-    e.Descripcion = e.Descripcion;
+    e.Descripcion = p.Descripcion;
 
     await context.SaveChangesAsync();
     return Results.NoContent();

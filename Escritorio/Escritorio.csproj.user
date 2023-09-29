@@ -10,6 +10,18 @@
     <Compile Update="EspecialidadForm\UpdateEspecialidad.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="MenuAdminForm\MenuAdmin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="PersonaForm\AltaPersona.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="PersonaForm\UpdatePersona.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="PersonaForm\ListadoPersona.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="PlanForm\AltaPlan.cs">
       <SubType>Form</SubType>
     </Compile>

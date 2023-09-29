@@ -23,3 +23,7 @@ C:\Users\Usuario\Desktop\Laureano\Universidad\2023\Tecnología de desarrollo IDE
 C:\Users\Usuario\Desktop\Laureano\Universidad\2023\Tecnología de desarrollo IDE (elect)\TPI\Escritorio\obj\Debug\net6.0-windows\Escritorio.PlanForm.ListadoPlanForm.resources
 C:\Users\Usuario\Desktop\Laureano\Universidad\2023\Tecnología de desarrollo IDE (elect)\TPI\Escritorio\obj\Debug\net6.0-windows\Escritorio.PlanForm.AltaPlanForm.resources
 C:\Users\Usuario\Desktop\Laureano\Universidad\2023\Tecnología de desarrollo IDE (elect)\TPI\Escritorio\obj\Debug\net6.0-windows\Escritorio.PlanForm.UpdatePlan.resources
+C:\Users\Usuario\Desktop\Laureano\Universidad\2023\Tecnología de desarrollo IDE (elect)\TPI\Escritorio\obj\Debug\net6.0-windows\Escritorio.PersonaForm.ListadoPersona.resources
+C:\Users\Usuario\Desktop\Laureano\Universidad\2023\Tecnología de desarrollo IDE (elect)\TPI\Escritorio\obj\Debug\net6.0-windows\Escritorio.PersonaForm.AltaPersona.resources
+C:\Users\Usuario\Desktop\Laureano\Universidad\2023\Tecnología de desarrollo IDE (elect)\TPI\Escritorio\obj\Debug\net6.0-windows\Escritorio.PersonaForm.UpdatePersona.resources
+C:\Users\Usuario\Desktop\Laureano\Universidad\2023\Tecnología de desarrollo IDE (elect)\TPI\Escritorio\obj\Debug\net6.0-windows\Escritorio.MenuAdminForm.MenuAdmin.resources

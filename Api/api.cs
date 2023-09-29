@@ -53,6 +53,7 @@ app.MapPut("/personas/{id}", async (int id, Persona p, UniversidadContext contex
     persona.Direccion = p.Direccion;
     persona.Legajo = p.Legajo;
     persona.Email = p.Email;
+    persona.Telefono = p.Telefono;
     persona.FechaNacimiento = p.FechaNacimiento;
     persona.IdPlan = p.IdPlan;
 
@@ -141,6 +142,7 @@ app.MapPost("/planes", async (Plan p, UniversidadContext context) =>
 
 app.MapGet("/planes", async (UniversidadContext context) =>
 {
+  
     var planes = await context.Planes.ToListAsync();
 
     return Results.Ok(planes);
@@ -177,8 +179,6 @@ app.MapDelete("/planes/{id}", async (int id, UniversidadContext context) =>
         return Results.NotFound();
     }
 });
-
-
 
 
 

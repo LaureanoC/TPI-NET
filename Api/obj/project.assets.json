@@ -1065,6 +1065,16 @@
           "bin/placeholder/Data.dll": {}
         }
       },
+      "Dtos/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v6.0",
+        "compile": {
+          "bin/placeholder/Dtos.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Dtos.dll": {}
+        }
+      },
       "Entities/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v6.0",
@@ -3067,6 +3077,11 @@
       "path": "../Data/Data.csproj",
       "msbuildProject": "../Data/Data.csproj"
     },
+    "Dtos/1.0.0": {
+      "type": "project",
+      "path": "../Dtos/Dtos.csproj",
+      "msbuildProject": "../Dtos/Dtos.csproj"
+    },
     "Entities/1.0.0": {
       "type": "project",
       "path": "../Entities/Entities.csproj",
@@ -3076,6 +3091,7 @@
   "projectFileDependencyGroups": {
     "net6.0": [
       "Data >= 1.0.0",
+      "Dtos >= 1.0.0",
       "Entities >= 1.0.0",
       "Swashbuckle.AspNetCore >= 6.5.0"
     ]
@@ -3115,6 +3131,9 @@
           "projectReferences": {
             "C:\\Users\\Usuario\\Desktop\\Laureano\\Universidad\\2023\\Tecnología de desarrollo IDE (elect)\\TPI\\Data\\Data.csproj": {
               "projectPath": "C:\\Users\\Usuario\\Desktop\\Laureano\\Universidad\\2023\\Tecnología de desarrollo IDE (elect)\\TPI\\Data\\Data.csproj"
+            },
+            "C:\\Users\\Usuario\\Desktop\\Laureano\\Universidad\\2023\\Tecnología de desarrollo IDE (elect)\\TPI\\Dtos\\Dtos.csproj": {
+              "projectPath": "C:\\Users\\Usuario\\Desktop\\Laureano\\Universidad\\2023\\Tecnología de desarrollo IDE (elect)\\TPI\\Dtos\\Dtos.csproj"
             },
             "C:\\Users\\Usuario\\Desktop\\Laureano\\Universidad\\2023\\Tecnología de desarrollo IDE (elect)\\TPI\\Entities\\Entities.csproj": {
               "projectPath": "C:\\Users\\Usuario\\Desktop\\Laureano\\Universidad\\2023\\Tecnología de desarrollo IDE (elect)\\TPI\\Entities\\Entities.csproj"

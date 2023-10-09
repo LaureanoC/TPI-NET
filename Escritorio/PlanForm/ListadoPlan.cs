@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Entities;
 using Escritorio.Especialidad;
+using Dtos;
 
 namespace Escritorio.PlanForm
 {
@@ -22,7 +23,7 @@ namespace Escritorio.PlanForm
 
         public async Task listar()
         {
-            var planes = await _httpClient.GetFromJsonAsync<IEnumerable<Plan>>("planes");
+            var planes = await _httpClient.GetFromJsonAsync<IEnumerable<PlanDto>>("planes");
             this.dataPlan.DataSource = planes;
         }
 

@@ -32,11 +32,16 @@ namespace Escritorio.PlanForm
 
             int idEspecialidad = Convert.ToInt32(comboEspecialidad.SelectedValue);
 
+            Entities.Especialidad esp = new Entities.Especialidad()
+            {
+                Id = idEspecialidad
+            };
+
             var plan = new Plan()
             {
                 Id = idPlan,
                 Descripcion = desc,
-                IdEspecialidad = idEspecialidad
+                Especialidad = esp
             };
 
             await _httpClient.PutAsJsonAsync($"planes/{idPlan}", plan);

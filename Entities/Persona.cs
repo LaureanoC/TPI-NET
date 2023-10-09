@@ -20,8 +20,6 @@
 
         public string Legajo { get; set; }
 
-        public int IdPlan { get; set; }
-
         public Plan Plan { get; set; }
 
 

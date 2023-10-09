@@ -12,9 +12,10 @@ namespace Entities
 
         public string Descripcion { get; set; }
 
-        public int IdEspecialidad { get; set; }
         public Especialidad Especialidad { get; set; }
 
         public ICollection<Persona> Alumnos { get; set; }
+
+        public ICollection<Materia> Materias { get; set; }
     }
 }

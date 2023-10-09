@@ -27,3 +27,5 @@ C:\Users\Usuario\Desktop\Laureano\Universidad\2023\Tecnología de desarrollo IDE
 C:\Users\Usuario\Desktop\Laureano\Universidad\2023\Tecnología de desarrollo IDE (elect)\TPI\Escritorio\obj\Debug\net6.0-windows\Escritorio.PersonaForm.AltaPersona.resources
 C:\Users\Usuario\Desktop\Laureano\Universidad\2023\Tecnología de desarrollo IDE (elect)\TPI\Escritorio\obj\Debug\net6.0-windows\Escritorio.PersonaForm.UpdatePersona.resources
 C:\Users\Usuario\Desktop\Laureano\Universidad\2023\Tecnología de desarrollo IDE (elect)\TPI\Escritorio\obj\Debug\net6.0-windows\Escritorio.MenuAdminForm.MenuAdmin.resources
+C:\Users\Usuario\Desktop\Laureano\Universidad\2023\Tecnología de desarrollo IDE (elect)\TPI\Escritorio\bin\Debug\net6.0-windows\Dtos.dll
+C:\Users\Usuario\Desktop\Laureano\Universidad\2023\Tecnología de desarrollo IDE (elect)\TPI\Escritorio\bin\Debug\net6.0-windows\Dtos.pdb

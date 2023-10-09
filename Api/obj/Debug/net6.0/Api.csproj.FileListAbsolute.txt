@@ -81,3 +81,5 @@ C:\Users\Usuario\Desktop\Laureano\Universidad\2023\Tecnología de desarrollo IDE
 C:\Users\Usuario\Desktop\Laureano\Universidad\2023\Tecnología de desarrollo IDE (elect)\TPI\Api\obj\Debug\net6.0\Api.pdb
 C:\Users\Usuario\Desktop\Laureano\Universidad\2023\Tecnología de desarrollo IDE (elect)\TPI\Api\obj\Debug\net6.0\Api.genruntimeconfig.cache
 C:\Users\Usuario\Desktop\Laureano\Universidad\2023\Tecnología de desarrollo IDE (elect)\TPI\Api\obj\Debug\net6.0\ref\Api.dll
+C:\Users\Usuario\Desktop\Laureano\Universidad\2023\Tecnología de desarrollo IDE (elect)\TPI\Api\bin\Debug\net6.0\Dtos.dll
+C:\Users\Usuario\Desktop\Laureano\Universidad\2023\Tecnología de desarrollo IDE (elect)\TPI\Api\bin\Debug\net6.0\Dtos.pdb

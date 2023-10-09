@@ -27,6 +27,11 @@ namespace Escritorio.PersonaForm
         private async void aggBtn_Click(object sender, EventArgs e)
         {
             int idPlan = Convert.ToInt32(inputComboPlan.SelectedValue);
+
+            Plan plan = new Plan()
+            {
+                Id = idPlan
+            };
             Persona persona = new Persona()
             {
                 Nombre = inputNombre.Text,
@@ -34,7 +39,7 @@ namespace Escritorio.PersonaForm
                 Direccion = inputDir.Text,
                 Telefono = inputTelefono.Text,
                 FechaNacimiento = inputFechaNac.Value,
-                IdPlan = idPlan,
+                Plan = plan,
                 Legajo = inputLegajo.Text,
                 Email = inputEmail.Text
             };

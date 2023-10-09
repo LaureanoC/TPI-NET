@@ -9,6 +9,7 @@
       "Api/1.0.0": {
         "dependencies": {
           "Data": "1.0.0",
+          "Dtos": "1.0.0",
           "Entities": "1.0.0",
           "Swashbuckle.AspNetCore": "6.5.0"
         },
@@ -611,6 +612,11 @@
           "Data.dll": {}
         }
       },
+      "Dtos/1.0.0": {
+        "runtime": {
+          "Dtos.dll": {}
+        }
+      },
       "Entities/1.0.0": {
         "runtime": {
           "Entities.dll": {}
@@ -1045,6 +1051,11 @@
       "hashPath": "system.windows.extensions.6.0.0.nupkg.sha512"
     },
     "Data/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Dtos/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

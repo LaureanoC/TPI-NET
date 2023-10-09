@@ -1,5 +1,6 @@
 
 using Data;
+using Dtos;
 using Entities;
 using Microsoft.EntityFrameworkCore;
 
@@ -18,8 +19,9 @@ app.UseSwaggerUI();
 
 // Personas
 
-app.MapPost("/personas", async (Persona persona, UniversidadContext context) =>
-{
+app.MapPost("/personas", async (Persona persona, UniversidadContext context) => {
+
+    context.Attach(persona.Plan);
     context.Personas.Add(persona);
     await context.SaveChangesAsync();
 
@@ -55,7 +57,7 @@ app.MapPut("/personas/{id}", async (int id, Persona p, UniversidadContext contex
     persona.Email = p.Email;
     persona.Telefono = p.Telefono;
     persona.FechaNacimiento = p.FechaNacimiento;
-    persona.IdPlan = p.IdPlan;
+    persona.Plan = p.Plan;
 
     await context.SaveChangesAsync();
     return Results.NoContent();
@@ -132,18 +134,24 @@ app.MapDelete("/especialidades/{id}", async (int id, UniversidadContext context)
 
 // Plan
 
-app.MapPost("/planes", async (Plan p, UniversidadContext context) =>
-{
+app.MapPost("/planes", async (Plan p, UniversidadContext context) => {
+    context.Attach(p.Especialidad);
     context.Planes.Add(p);
     await context.SaveChangesAsync();
 
     return Results.Created($"/planes/{p.Id}", p);
 });
 
-app.MapGet("/planes", async (UniversidadContext context) =>
-{
-  
-    var planes = await context.Planes.ToListAsync();
+app.MapGet("/planes", async (UniversidadContext context) => {
+
+    var planes = await context.Planes
+    .Select(p => new PlanDto()
+    {
+        Id = p.Id,
+        Descripcion = p.Descripcion,
+        DescripcionEspecialidad = p.Especialidad.Descripcion
+    })
+    .ToListAsync();
 
     return Results.Ok(planes);
 });
@@ -159,8 +167,14 @@ app.MapPut("/planes/{id}", async (int id, Plan p, UniversidadContext context) =>
 
     if (pl is null) return Results.NotFound();
 
+    if (pl.Especialidad.Id != p.Especialidad.Id)
+    {
+        var esp = await context.Especialidades.FindAsync(p.Especialidad.Id);
+        context.Attach(p.Especialidad);
+        pl.Especialidad = esp;
+    }
+
     pl.Descripcion = p.Descripcion;
-    pl.IdEspecialidad = p.IdEspecialidad;
 
     await context.SaveChangesAsync();
     return Results.NoContent();
@@ -180,6 +194,46 @@ app.MapDelete("/planes/{id}", async (int id, UniversidadContext context) =>
     }
 });
 
+// Materia
+
+
+app.MapPost("/materias", async (Materia m, UniversidadContext context) =>
+{
+    context.Attach(m.Plan);
+    context.Materias.Add(m);
+    await context.SaveChangesAsync();
+
+    return Results.Ok(m);
+});
+
+
+app.MapGet("/materias", async( UniversidadContext context) =>
+
+{
+    var materias = await context.Materias
+    .Select(ma => new MateriaDto()
+    {
+        Id = ma.Id,
+        Descripcion = ma.Descripcion,
+        HsSemanales = ma.HsSemanales,
+        HsTotales  = ma.HsTotales,
+        DescripcionPlan = ma.Plan.Descripcion
+    })
+    .ToListAsync();
+
+    return Results.Ok(materias);
+
+});
+
+app.MapGet("/materias/{id}", async (int id, UniversidadContext context) =>
+    await context.Materias.FindAsync(id) is Materia m
+        ? Results.Ok(m)
+        : Results.NotFound());
+
+app.MapPut("/materias/{id}", async(Materia m, UniversidadContext context) => 
+{ 
+
+});
 
 
 app.Run();

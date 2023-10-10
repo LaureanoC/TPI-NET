@@ -43,11 +43,6 @@ namespace Escritorio.MateriaForm
             await listar();
         }
 
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
-
         private async void btnEliminar_Click(object sender, EventArgs e)
         {
             int id = Convert.ToInt32(this.dataGridView1.SelectedRows[0].Cells[0].Value);

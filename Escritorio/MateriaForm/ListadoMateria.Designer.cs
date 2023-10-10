@@ -43,7 +43,7 @@
             dataGridView1.RowTemplate.Height = 25;
             dataGridView1.Size = new Size(751, 309);
             dataGridView1.TabIndex = 0;
-            dataGridView1.CellContentClick += dataGridView1_CellContentClick;
+            
             // 
             // btnAgregar
             // 

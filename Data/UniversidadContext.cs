@@ -17,6 +17,8 @@ namespace Data
 
         public DbSet<Materia> Materias { get; set; }
 
+        public DbSet<Comision> Comisiones { get; set; }
+
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) =>
             optionsBuilder
@@ -46,6 +48,12 @@ namespace Data
 
             modelBuilder.Entity<Plan>()
                 .HasMany(m => m.Materias)
+                .WithOne(p => p.Plan)
+                .HasForeignKey("idPlan")
+                .IsRequired();
+
+            modelBuilder.Entity<Plan>()
+                .HasMany(c => c.Comisiones)
                 .WithOne(p => p.Plan)
                 .HasForeignKey("idPlan")
                 .IsRequired();

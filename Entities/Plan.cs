@@ -17,5 +17,7 @@ namespace Entities
         public ICollection<Persona> Alumnos { get; set; }
 
         public ICollection<Materia> Materias { get; set; }
+
+        public ICollection<Comision> Comisiones { get; set;}
     }
 }

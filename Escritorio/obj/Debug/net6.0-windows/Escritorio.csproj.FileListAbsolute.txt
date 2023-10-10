@@ -32,3 +32,6 @@ C:\Users\Usuario\Desktop\Laureano\Universidad\2023\Tecnología de desarrollo IDE
 C:\Users\Usuario\Desktop\Laureano\Universidad\2023\Tecnología de desarrollo IDE (elect)\TPI\Escritorio\obj\Debug\net6.0-windows\Escritorio.MateriaForm.AltaMateria.resources
 C:\Users\Usuario\Desktop\Laureano\Universidad\2023\Tecnología de desarrollo IDE (elect)\TPI\Escritorio\obj\Debug\net6.0-windows\Escritorio.MateriaForm.ListadoMateria.resources
 C:\Users\Usuario\Desktop\Laureano\Universidad\2023\Tecnología de desarrollo IDE (elect)\TPI\Escritorio\obj\Debug\net6.0-windows\Escritorio.MateriaForm.UpdateMateria.resources
+C:\Users\Usuario\Desktop\Laureano\Universidad\2023\Tecnología de desarrollo IDE (elect)\TPI\Escritorio\obj\Debug\net6.0-windows\Escritorio.ComisionForm.AltaComision.resources
+C:\Users\Usuario\Desktop\Laureano\Universidad\2023\Tecnología de desarrollo IDE (elect)\TPI\Escritorio\obj\Debug\net6.0-windows\Escritorio.ComisionForm.ListadoComision.resources
+C:\Users\Usuario\Desktop\Laureano\Universidad\2023\Tecnología de desarrollo IDE (elect)\TPI\Escritorio\obj\Debug\net6.0-windows\Escritorio.ComisionForm.UpdateComision.resources

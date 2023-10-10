@@ -263,5 +263,63 @@ app.MapDelete("/materias/{id}", async (int id, UniversidadContext context) =>
     }
 });
 
+// Comision
+
+app.MapPost("/comisiones", async(Comision c, UniversidadContext context) =>
+{
+    context.Attach(c.Plan);
+    context.Add(c);
+    await context.SaveChangesAsync();
+
+    return Results.Ok(c);
+});
+
+app.MapGet("/comisiones", async (UniversidadContext context) =>
+{
+    var comisiones = await context.Comisiones
+        .Select(c => new ComisionDto()
+        {
+            Id = c.Id,
+            Descripcion = c.Descripcion,
+            Anio = c.Anio,
+            DescripcionPlan = c.Plan.Descripcion
+        })
+        .ToListAsync(); ;
+
+    return Results.Ok(comisiones);
+
+
+
+});
+
+app.MapPut("/comisiones/{id}", async(Comision c, int id, UniversidadContext context) =>
+{
+    var com = await context.Comisiones.FindAsync(id);
+
+    if (com is null) return Results.NotFound();
+
+    context.Attach(c.Plan);
+    com.Descripcion = c.Descripcion;
+    com.Anio = c.Anio;
+    com.Plan = c.Plan;
+
+    await context.SaveChangesAsync();
+    return Results.NoContent();
+});
+
+app.MapDelete("/comisiones/{id}", async (int id, UniversidadContext context) =>
+{
+    if (await context.Comisiones.FindAsync(id) is Comision c)
+    {
+        context.Remove(c);
+        await context.SaveChangesAsync();
+        return Results.Ok(c);
+    }
+    else
+    {
+        return Results.NotFound();
+    }
+});
+
 
 app.Run();

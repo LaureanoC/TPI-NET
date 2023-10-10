@@ -33,6 +33,7 @@
             button3 = new Button();
             label1 = new Label();
             btnMateria = new Button();
+            btnComision = new Button();
             SuspendLayout();
             // 
             // espBtn
@@ -84,11 +85,22 @@
             btnMateria.UseVisualStyleBackColor = true;
             btnMateria.Click += btnMateria_Click;
             // 
+            // btnComision
+            // 
+            btnComision.Location = new Point(107, 166);
+            btnComision.Name = "btnComision";
+            btnComision.Size = new Size(81, 23);
+            btnComision.TabIndex = 5;
+            btnComision.Text = "Comision";
+            btnComision.UseVisualStyleBackColor = true;
+            btnComision.Click += btnComision_Click;
+            // 
             // MenuAdmin
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(288, 253);
+            Controls.Add(btnComision);
             Controls.Add(btnMateria);
             Controls.Add(label1);
             Controls.Add(button3);
@@ -107,5 +119,6 @@
         private Button button3;
         private Label label1;
         private Button btnMateria;
+        private Button btnComision;
     }
 }

@@ -39,9 +39,6 @@ namespace Data
                 .IsRequired();
 
             modelBuilder.Entity<Plan>()
-                .HasOne(p => p.Especialidad);
-
-            modelBuilder.Entity<Plan>()
                 .HasMany(p => p.Alumnos)
                 .WithOne(p => p.Plan)
                 .HasForeignKey("idPlan")

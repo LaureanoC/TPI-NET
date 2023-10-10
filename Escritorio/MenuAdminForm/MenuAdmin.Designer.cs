@@ -32,6 +32,7 @@
             planBtn = new Button();
             button3 = new Button();
             label1 = new Label();
+            btnMateria = new Button();
             SuspendLayout();
             // 
             // espBtn
@@ -73,11 +74,22 @@
             label1.TabIndex = 3;
             label1.Text = "Menu de administración";
             // 
+            // btnMateria
+            // 
+            btnMateria.Location = new Point(20, 166);
+            btnMateria.Name = "btnMateria";
+            btnMateria.Size = new Size(81, 23);
+            btnMateria.TabIndex = 4;
+            btnMateria.Text = "Materia";
+            btnMateria.UseVisualStyleBackColor = true;
+            btnMateria.Click += btnMateria_Click;
+            // 
             // MenuAdmin
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(295, 186);
+            ClientSize = new Size(288, 253);
+            Controls.Add(btnMateria);
             Controls.Add(label1);
             Controls.Add(button3);
             Controls.Add(planBtn);
@@ -94,5 +106,6 @@
         private Button planBtn;
         private Button button3;
         private Label label1;
+        private Button btnMateria;
     }
 }

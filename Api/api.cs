@@ -166,13 +166,15 @@ app.MapPut("/planes/{id}", async (int id, Plan p, UniversidadContext context) =>
     var pl = await context.Planes.FindAsync(id);
 
     if (pl is null) return Results.NotFound();
+    
+    /*context.Entry(pl)
+       .Reference(p => p.Especialidad)
+       .Load();*/
 
-    if (pl.Especialidad.Id != p.Especialidad.Id)
-    {
-        var esp = await context.Especialidades.FindAsync(p.Especialidad.Id);
-        context.Attach(p.Especialidad);
-        pl.Especialidad = esp;
-    }
+    //var esp = await context.Especialidades.FindAsync(p.Especialidad.Id);
+    context.Attach(p.Especialidad);
+    pl.Especialidad = p.Especialidad;
+    
 
     pl.Descripcion = p.Descripcion;
 
@@ -230,9 +232,35 @@ app.MapGet("/materias/{id}", async (int id, UniversidadContext context) =>
         ? Results.Ok(m)
         : Results.NotFound());
 
-app.MapPut("/materias/{id}", async(Materia m, UniversidadContext context) => 
-{ 
+app.MapPut("/materias/{id}", async(Materia m, int id, UniversidadContext context) => 
+{
+    var mat = await context.Materias.FindAsync(id);
 
+    if (mat is null) return Results.NotFound();
+
+    context.Attach(m.Plan);
+    mat.Plan = m.Plan;
+    mat.Descripcion = m.Descripcion;
+    mat.HsSemanales = m.HsSemanales;
+    mat.HsTotales = m.HsTotales;
+
+    await context.SaveChangesAsync();
+    return Results.NoContent();
+
+});
+
+app.MapDelete("/materias/{id}", async (int id, UniversidadContext context) =>
+{
+    if (await context.Materias.FindAsync(id) is Materia m)
+    {
+        context.Remove(m);
+        await context.SaveChangesAsync();
+        return Results.Ok(m);
+    }
+    else
+    {
+        return Results.NotFound();
+    }
 });
 
 

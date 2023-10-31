@@ -51,11 +51,23 @@ namespace Escritorio.PlanForm
 
         private async void UpdatePlan_Load(object sender, EventArgs e)
         {
+            var plan = await _httpClient.GetFromJsonAsync<Plan>($"planes/{idPlan}");
+
             var especialidades = await _httpClient.GetFromJsonAsync<IEnumerable<Entities.Especialidad>>("especialidades");
 
             comboEspecialidad.DataSource = especialidades;
             comboEspecialidad.DisplayMember = "Descripcion";
             comboEspecialidad.ValueMember = "Id";
+
+            comboEspecialidad.SelectedValue = plan.Especialidad.Id;
+
+
+            inputDesc.Text = plan.Descripcion;
+
+
+
+
+
         }
     }
 }

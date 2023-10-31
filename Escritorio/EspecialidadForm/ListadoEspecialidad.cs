@@ -66,5 +66,13 @@ namespace Escritorio.Especialidad
 
             await listar();
         }
+
+        private void btnGet_Click(object sender, EventArgs e)
+        {
+            
+            var descripcion = this.dataEspecialidad.SelectedRows[0].Cells[1].Value;
+
+            MessageBox.Show("Especialidad: " + descripcion);
+        }
     }
 }

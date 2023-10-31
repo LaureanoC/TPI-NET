@@ -65,5 +65,15 @@ namespace Escritorio.PlanForm
 
             await listar();
         }
+
+        private void btnGet_Click(object sender, EventArgs e)
+        {
+           
+            var descripcion = this.dataPlan.SelectedRows[0].Cells[1].Value;
+
+            var descripcionEspecialidad = this.dataPlan.SelectedRows[0].Cells[2].Value;
+
+            MessageBox.Show("Plan: " + descripcion + " Especialidad: " + descripcionEspecialidad);
+        }
     }
 }

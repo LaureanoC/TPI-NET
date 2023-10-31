@@ -39,10 +39,26 @@ app.MapGet("/personas", async (UniversidadContext context) =>
 });
 
 
-app.MapGet("/personas/{id}", async (int id, UniversidadContext context) =>
-    await context.Personas.FindAsync(id) is Persona persona
-        ? Results.Ok(persona)
-        : Results.NotFound());
+app.MapGet("/personas/{id}", async (int id, UniversidadContext context) => 
+{
+    var persona = await context.Personas
+           .Where(p => p.Id == id)
+           .Select(p => new
+           {
+               Id = p.Id,
+               Plan = new Plan() { Id = p.Plan.Id },
+               Nombre = p.Nombre,
+               Apellido = p.Apellido,
+               Email = p.Email,
+               Direccion = p.Direccion,
+               Legajo = p.Legajo,
+               Telefono = p.Telefono,
+               FechaNacimiento = p.FechaNacimiento,
+           })
+           .FirstOrDefaultAsync();
+
+    return Results.Ok(persona);
+});
 
 app.MapPut("/personas/{id}", async (int id, Persona p, UniversidadContext context) =>
 {
@@ -157,9 +173,20 @@ app.MapGet("/planes", async (UniversidadContext context) => {
 });
 
 app.MapGet("/planes/{id}", async (int id, UniversidadContext context) =>
-    await context.Planes.FindAsync(id) is Plan p
-        ? Results.Ok(p)
-        : Results.NotFound());
+    {
+        var plan = await context.Planes
+           .Where(p => p.Id == id)
+           .Select(p => new
+           {
+               Id = p.Id,
+               Especialidad = new Especialidad() { Id = p.Especialidad.Id },
+               Descripcion = p.Descripcion
+           })
+           .FirstOrDefaultAsync();
+
+        return Results.Ok(plan);
+
+    });
 
 app.MapPut("/planes/{id}", async (int id, Plan p, UniversidadContext context) =>
 {
@@ -227,10 +254,23 @@ app.MapGet("/materias", async( UniversidadContext context) =>
 
 });
 
-app.MapGet("/materias/{id}", async (int id, UniversidadContext context) =>
-    await context.Materias.FindAsync(id) is Materia m
-        ? Results.Ok(m)
-        : Results.NotFound());
+app.MapGet("/materias/{id}", async (int id, UniversidadContext context) => 
+{
+    var materia = await context.Materias
+           .Where(m => m.Id == id)
+           .Select(m => new
+           {
+               Id = m.Id,
+               Plan = new Plan() { Id = m.Plan.Id },
+               Descripcion = m.Descripcion,
+               HsSemanales = m.HsSemanales,
+               HsTotales = m.HsTotales
+           })
+           .FirstOrDefaultAsync();
+
+    return Results.Ok(materia);
+
+});
 
 app.MapPut("/materias/{id}", async(Materia m, int id, UniversidadContext context) => 
 {
@@ -288,9 +328,26 @@ app.MapGet("/comisiones", async (UniversidadContext context) =>
 
     return Results.Ok(comisiones);
 
-
-
 });
+
+app.MapGet("/comisiones/{id}", async (int id, UniversidadContext context) =>
+{
+    var comision = await context.Comisiones
+           .Where(c => c.Id == id)
+           .Select(c => new
+           {
+               Id = c.Id,
+               Plan = new Plan() { Id = c.Plan.Id },
+               Descripcion = c.Descripcion,
+               Anio = c.Anio,
+
+               
+           })
+           .FirstOrDefaultAsync();
+
+    return Results.Ok(comision);
+});
+    
 
 app.MapPut("/comisiones/{id}", async(Comision c, int id, UniversidadContext context) =>
 {
@@ -311,7 +368,7 @@ app.MapDelete("/comisiones/{id}", async (int id, UniversidadContext context) =>
 {
     if (await context.Comisiones.FindAsync(id) is Comision c)
     {
-        context.Remove(c);
+        context.Comisiones.Remove(c);
         await context.SaveChangesAsync();
         return Results.Ok(c);
     }
@@ -320,6 +377,92 @@ app.MapDelete("/comisiones/{id}", async (int id, UniversidadContext context) =>
         return Results.NotFound();
     }
 });
+
+
+// Curso
+
+app.MapPost("cursos", async(Curso c, UniversidadContext context) =>
+{
+    context.Attach(c.Materia);
+    context.Attach(c.Comision);
+    context.Cursos.Add(c);
+    await context.SaveChangesAsync();
+
+    return Results.Ok(c);
+});
+
+app.MapGet("/cursos", async (UniversidadContext context) =>
+{
+    var cursos = await context.Cursos
+        .Select(c => new CursoDto()
+        {
+            Id = c.Id,
+            DescripcionMateria = c.Materia.Descripcion,
+            Año = c.Anio,
+            DescripcionComision = c.Comision.Descripcion,
+            Cupo = c.Cupo
+        })
+        .ToListAsync(); ;
+
+    return Results.Ok(cursos);
+});
+
+app.MapGet("/cursos/{id}", async (int id, UniversidadContext context) =>
+    {
+        var curso = await context.Cursos
+        .Where(c => c.Id == id)
+        .Select(c => new
+        {
+            Id = c.Id,
+            Materia = new Materia (){
+                Id = c.Materia.Id
+            },
+            Anio = c.Anio,
+            Comision = new Comision()
+            {
+                Id = c.Comision.Id
+            },
+            Cupo = c.Cupo
+        })
+        .FirstOrDefaultAsync();
+
+        return Results.Ok(curso);
+
+    });
+
+
+app.MapPut("/cursos/{id}", async (Curso c, int id, UniversidadContext context) =>
+{
+    var curso = await context.Cursos.FindAsync(id);
+
+    if (curso is null) return Results.NotFound();
+
+    context.Attach(c.Materia);
+    context.Attach(c.Comision);
+    curso.Cupo = c.Cupo;
+    curso.Anio = c.Anio;
+    curso.Materia = c.Materia;
+    curso.Comision = c.Comision;
+
+    await context.SaveChangesAsync();
+    return Results.NoContent();
+});
+
+app.MapDelete("/cursos/{id}", async (int id, UniversidadContext context) =>
+{
+    if (await context.Cursos.FindAsync(id) is Curso c)
+    {
+        context.Cursos.Remove(c);
+        await context.SaveChangesAsync();
+        return Results.Ok(c);
+    }
+    else
+    {
+        return Results.NotFound();
+    }
+});
+
+
 
 
 app.Run();

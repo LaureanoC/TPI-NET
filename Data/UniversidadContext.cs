@@ -19,6 +19,8 @@ namespace Data
 
         public DbSet<Comision> Comisiones { get; set; }
 
+        public DbSet<Curso> Cursos { get; set; }
+
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) =>
             optionsBuilder
@@ -57,9 +59,18 @@ namespace Data
                 .WithOne(p => p.Plan)
                 .HasForeignKey("idPlan")
                 .IsRequired();
+
+            modelBuilder.Entity<Curso>()
+                .HasOne(C => C.Comision)
+                .WithMany()
+                .HasForeignKey("idComision")
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<Curso>()
+                .HasOne(m => m.Materia)
+                .WithMany()
+                .HasForeignKey("idMateria")
+                .OnDelete(DeleteBehavior.Restrict);
         }
-
-
-
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Entities;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -42,8 +43,11 @@ namespace Escritorio.Especialidad
             this.Dispose();
         }
 
-        private void UpdateEspecialidad_Load(object sender, EventArgs e)
+        private async void UpdateEspecialidad_Load(object sender, EventArgs e)
         {
+            var esp = await _httpClient.GetFromJsonAsync<Entities.Especialidad>($"especialidades/{idEsp}");
+
+            inputDesc.Text = esp.Descripcion ;
 
         }
     }

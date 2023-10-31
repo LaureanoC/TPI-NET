@@ -48,11 +48,23 @@ namespace Escritorio.ComisionForm
 
         private async void UpdateComision_Load(object sender, EventArgs e)
         {
+           
+            var comision = await _httpClient.GetFromJsonAsync<Comision>($"comisiones/{this.id}");
+
             var planes = await _httpClient.GetFromJsonAsync<IEnumerable<Plan>>("planes");
 
             comboPlan.DataSource = planes;
             comboPlan.DisplayMember = "Descripcion";
             comboPlan.ValueMember = "Id";
+
+            comboPlan.SelectedValue = comision.Plan.Id;
+            
+            inputAnio.Text = comision.Anio.ToString();
+            inputDesc.Text = comision.Descripcion;
+
+
+
+
         }
     }
 }

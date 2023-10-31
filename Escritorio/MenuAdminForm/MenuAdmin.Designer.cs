@@ -34,6 +34,7 @@
             label1 = new Label();
             btnMateria = new Button();
             btnComision = new Button();
+            btnCurso = new Button();
             SuspendLayout();
             // 
             // espBtn
@@ -95,11 +96,22 @@
             btnComision.UseVisualStyleBackColor = true;
             btnComision.Click += btnComision_Click;
             // 
+            // btnCurso
+            // 
+            btnCurso.Location = new Point(193, 166);
+            btnCurso.Name = "btnCurso";
+            btnCurso.Size = new Size(81, 23);
+            btnCurso.TabIndex = 6;
+            btnCurso.Text = "Curso";
+            btnCurso.UseVisualStyleBackColor = true;
+            btnCurso.Click += btnCurso_Click;
+            // 
             // MenuAdmin
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(288, 253);
+            Controls.Add(btnCurso);
             Controls.Add(btnComision);
             Controls.Add(btnMateria);
             Controls.Add(label1);
@@ -120,5 +132,6 @@
         private Label label1;
         private Button btnMateria;
         private Button btnComision;
+        private Button btnCurso;
     }
 }

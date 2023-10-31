@@ -1,4 +1,5 @@
 ﻿using Escritorio.ComisionForm;
+using Escritorio.CursoForm;
 using Escritorio.Especialidad;
 using Escritorio.MateriaForm;
 using Escritorio.PersonaForm;
@@ -53,6 +54,13 @@ namespace Escritorio.MenuAdminForm
         private void btnComision_Click(object sender, EventArgs e)
         {
             ListadoComision form = new ListadoComision();
+            form.Owner = this;
+            form.ShowDialog();
+        }
+
+        private void btnCurso_Click(object sender, EventArgs e)
+        {
+            ListadoCurso form = new ListadoCurso();
             form.Owner = this;
             form.ShowDialog();
         }

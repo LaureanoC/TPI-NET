@@ -62,5 +62,17 @@ namespace Escritorio.MateriaForm
 
             await listar();
         }
+
+        private async void btnGet_Click(object sender, EventArgs e)
+        {
+            int id = Convert.ToInt32(this.dataGridView1.SelectedRows[0].Cells[0].Value);
+            
+            var materia = await _httpClient.GetFromJsonAsync<MateriaDto>($"materias/{id}");
+
+            
+
+            
+
+        }
     }
 }

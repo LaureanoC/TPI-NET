@@ -10,6 +10,15 @@
     <Compile Update="ComisionForm\ListadoComision.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="CursoForm\AltaForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="CursoForm\UpdateCurso.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="CursoForm\ListadoCurso.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="EspecialidadForm\AltaEspecialidad.cs">
       <SubType>Form</SubType>
     </Compile>

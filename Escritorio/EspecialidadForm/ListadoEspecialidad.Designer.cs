@@ -32,6 +32,7 @@
             btnAgregar = new Button();
             button2 = new Button();
             button3 = new Button();
+            btnGet = new Button();
             ((System.ComponentModel.ISupportInitialize)dataEspecialidad).BeginInit();
             SuspendLayout();
             // 
@@ -77,11 +78,22 @@
             button3.UseVisualStyleBackColor = true;
             button3.Click += button3_Click;
             // 
+            // btnGet
+            // 
+            btnGet.Location = new Point(114, 247);
+            btnGet.Name = "btnGet";
+            btnGet.Size = new Size(75, 23);
+            btnGet.TabIndex = 4;
+            btnGet.Text = "Get";
+            btnGet.UseVisualStyleBackColor = true;
+            btnGet.Click += btnGet_Click;
+            // 
             // ListadoEspecialidadForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(445, 282);
+            Controls.Add(btnGet);
             Controls.Add(button3);
             Controls.Add(button2);
             Controls.Add(btnAgregar);
@@ -99,5 +111,6 @@
         private Button btnAgregar;
         private Button button2;
         private Button button3;
+        private Button btnGet;
     }
 }

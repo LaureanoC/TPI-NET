@@ -14,6 +14,8 @@ namespace Entities
 
         public int Anio { get; set; }
 
-        public Plan Plan { get; set; }
+        public Plan Plan { get; set; }          
+
+        
     }
 }

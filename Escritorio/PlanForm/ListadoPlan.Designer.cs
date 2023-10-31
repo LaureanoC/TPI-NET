@@ -32,6 +32,7 @@
             btnAgregar = new Button();
             modButton = new Button();
             elimButton = new Button();
+            btnGet = new Button();
             ((System.ComponentModel.ISupportInitialize)dataPlan).BeginInit();
             SuspendLayout();
             // 
@@ -74,11 +75,22 @@
             elimButton.UseVisualStyleBackColor = true;
             elimButton.Click += elimButton_Click;
             // 
+            // btnGet
+            // 
+            btnGet.Location = new Point(280, 261);
+            btnGet.Name = "btnGet";
+            btnGet.Size = new Size(75, 23);
+            btnGet.TabIndex = 4;
+            btnGet.Text = "Get";
+            btnGet.UseVisualStyleBackColor = true;
+            btnGet.Click += btnGet_Click;
+            // 
             // ListadoPlanForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(610, 293);
+            Controls.Add(btnGet);
             Controls.Add(elimButton);
             Controls.Add(modButton);
             Controls.Add(btnAgregar);
@@ -96,5 +108,6 @@
         private Button btnAgregar;
         private Button modButton;
         private Button elimButton;
+        private Button btnGet;
     }
 }

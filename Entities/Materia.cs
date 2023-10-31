@@ -17,5 +17,9 @@ namespace Entities
         public int HsTotales { get; set; }
 
         public Plan Plan { get; set; }
+
+        
+
+
     }
 }

@@ -53,11 +53,20 @@ namespace Escritorio.MateriaForm
 
         private async void UpdateMateria_Load(object sender, EventArgs e)
         {
+
+            var materia = await _httpClient.GetFromJsonAsync<Materia>($"materias/{id}");
+
             var planes = await _httpClient.GetFromJsonAsync<IEnumerable<Plan>>("planes");
 
             comboBox1.DataSource = planes;
             comboBox1.DisplayMember = "Descripcion";
             comboBox1.ValueMember = "Id";
+
+            comboBox1.SelectedValue = materia.Plan.Id;
+
+            inputMateria.Text = materia.Descripcion;
+            inputHorasSemanales.Text = materia.HsSemanales.ToString();
+            inputHorasTotales.Text = materia.HsTotales.ToString();
         }
     }
 }

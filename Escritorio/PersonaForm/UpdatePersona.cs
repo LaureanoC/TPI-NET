@@ -55,11 +55,28 @@ namespace Escritorio.PersonaForm
 
         private async void UpdatePersona_Load(object sender, EventArgs e)
         {
+
+            var persona = await _httpClient.GetFromJsonAsync<Persona>($"personas/{id}");
+
+
+
             var planes = await _httpClient.GetFromJsonAsync<IEnumerable<Plan>>("planes");
+
 
             inputComboPlan.DataSource = planes;
             inputComboPlan.DisplayMember = "Descripcion";
             inputComboPlan.ValueMember = "Id";
+
+            inputComboPlan.SelectedValue = persona.Plan.Id;
+
+            inputNombre.Text = persona.Nombre;
+            inputApellido.Text = persona.Apellido;
+            inputDir.Text = persona.Direccion;
+            inputEmail.Text = persona.Email;
+            inputFechaNac.Value = persona.FechaNacimiento;
+            inputTelefono.Text = persona.Telefono;
+            inputLegajo.Text = persona.Legajo;
+
         }
     }
 }

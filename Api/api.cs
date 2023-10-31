@@ -31,12 +31,25 @@ app.MapPost("/personas", async (Persona persona, UniversidadContext context) => 
 
 app.MapGet("/personas", async (UniversidadContext context) =>
 {
-    var alu = await context.Personas.ToListAsync();
+    var per = await context.Personas.ToListAsync();
 
-    return Results.Ok(alu);
+    return Results.Ok(per);
 
 
 });
+
+app.MapGet("/alumnos", async (UniversidadContext context) =>
+{
+    var alu = await context.Personas.ToListAsync();
+
+    var filtro = from alumno in alu where alumno.TipoPersona.Equals("Alumno") select alumno;
+
+    return Results.Ok(filtro);
+
+
+});
+
+
 
 
 app.MapGet("/personas/{id}", async (int id, UniversidadContext context) => 
@@ -461,6 +474,87 @@ app.MapDelete("/cursos/{id}", async (int id, UniversidadContext context) =>
         return Results.NotFound();
     }
 });
+
+// InscripcionAlumno
+
+app.MapPost("/inscripcionesalumnos", async(UniversidadContext context, InscripcionAlumno ia) =>
+{
+    context.Attach(ia.Alumno);
+    context.Attach(ia.Curso);
+    context.InscripcionesAlumnos.Add(ia);
+    await context.SaveChangesAsync();
+
+    return Results.Ok(ia);
+
+});
+
+
+
+app.MapGet("/inscripcionesalumnos", async(UniversidadContext context) =>
+{
+    var insc = await context.InscripcionesAlumnos
+        .Select(c => new InscripcionAlumnoDto()
+        {
+            Id = c.Id,
+            AñoCurso = c.Curso.Anio,
+            Alumno = c.Alumno.Nombre +" " +c.Alumno.Apellido,
+            Condicion = c.Condicion,
+            Nota = (double)c.Nota
+        })
+        .ToListAsync();
+
+    return Results.Ok(insc);
+});
+
+app.MapGet("/inscripcionesalumnos/{id}", async (int id, UniversidadContext context) =>
+{
+    var ins = await context.InscripcionesAlumnos
+    .Where(c => c.Id == id)
+    .Select(c => new
+    {
+        Id = c.Id,
+        Alumno = new Persona { Id = c.Alumno.Id },
+        Curso = new Curso() { Id = c.Curso.Id },
+        Condicion = c.Condicion,
+        Nota = c.Nota
+    })
+    .FirstOrDefaultAsync();
+
+    return Results.Ok(ins);
+
+});
+
+app.MapPut("/inscripcionesalumnos/{id}", async (InscripcionAlumno ia, int id, UniversidadContext context) =>
+{
+    var inscripcion = await context.InscripcionesAlumnos.FindAsync(id);
+
+    if (inscripcion is null) return Results.NotFound();
+
+    context.Attach(ia.Alumno);
+    context.Attach(ia.Curso);
+    inscripcion.Curso = ia.Curso;
+    inscripcion.Alumno = ia.Alumno;
+    inscripcion.Condicion = ia.Condicion;
+    inscripcion.Nota = ia.Nota;
+
+    await context.SaveChangesAsync();
+    return Results.NoContent();
+});
+
+app.MapDelete("/inscripcionesalumnos/{id}", async (int id, UniversidadContext context) =>
+{
+    if (await context.InscripcionesAlumnos.FindAsync(id) is InscripcionAlumno ia)
+    {
+        context.InscripcionesAlumnos.Remove(ia);
+        await context.SaveChangesAsync();
+        return Results.Ok(ia);
+    }
+    else
+    {
+        return Results.NotFound();
+    }
+});
+
 
 
 

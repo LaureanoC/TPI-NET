@@ -35,6 +35,7 @@
             btnMateria = new Button();
             btnComision = new Button();
             btnCurso = new Button();
+            btnIAlumno = new Button();
             SuspendLayout();
             // 
             // espBtn
@@ -106,11 +107,22 @@
             btnCurso.UseVisualStyleBackColor = true;
             btnCurso.Click += btnCurso_Click;
             // 
+            // btnIAlumno
+            // 
+            btnIAlumno.Location = new Point(21, 206);
+            btnIAlumno.Name = "btnIAlumno";
+            btnIAlumno.Size = new Size(116, 23);
+            btnIAlumno.TabIndex = 7;
+            btnIAlumno.Text = "InscripcionAlumno";
+            btnIAlumno.UseVisualStyleBackColor = true;
+            btnIAlumno.Click += btnIAlumno_Click;
+            // 
             // MenuAdmin
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(288, 253);
+            Controls.Add(btnIAlumno);
             Controls.Add(btnCurso);
             Controls.Add(btnComision);
             Controls.Add(btnMateria);
@@ -133,5 +145,6 @@
         private Button btnMateria;
         private Button btnComision;
         private Button btnCurso;
+        private Button btnIAlumno;
     }
 }

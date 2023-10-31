@@ -41,7 +41,8 @@ namespace Escritorio.PersonaForm
                 FechaNacimiento = inputFechaNac.Value,
                 Plan = plan,
                 Legajo = inputLegajo.Text,
-                Email = inputEmail.Text
+                Email = inputEmail.Text,
+                TipoPersona = inputTipo.Text
             };
 
             await _httpClient.PostAsJsonAsync("personas", persona);
@@ -56,6 +57,8 @@ namespace Escritorio.PersonaForm
             inputComboPlan.DataSource = planes;
             inputComboPlan.DisplayMember = "Descripcion";
             inputComboPlan.ValueMember = "Id";
+
+            inputTipo.SelectedIndex = 0;
         }
     }
 }

@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Entities;
 using Microsoft.Extensions.Logging;
 using System.Reflection.Metadata;
+using Azure;
 
 namespace Data
 {
@@ -20,6 +21,10 @@ namespace Data
         public DbSet<Comision> Comisiones { get; set; }
 
         public DbSet<Curso> Cursos { get; set; }
+
+        public DbSet<InscripcionAlumno> InscripcionesAlumnos { get; set; }
+
+        public DbSet<InscripcionProfesor> InscripcionesProfesores { get; set; }
 
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) =>
@@ -71,6 +76,35 @@ namespace Data
                 .WithMany()
                 .HasForeignKey("idMateria")
                 .OnDelete(DeleteBehavior.Restrict);
+
+            
+            modelBuilder.Entity<InscripcionAlumno>()
+                .HasOne(i => i.Curso)
+                .WithMany()
+                .HasForeignKey("idCurso")
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<InscripcionAlumno>()
+                .HasOne(i => i.Alumno)
+                .WithMany()
+                .HasForeignKey("idAlumno")
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<InscripcionProfesor>()
+                .HasOne(i => i.Curso)
+                .WithMany()
+                .HasForeignKey("idCurso")
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<InscripcionProfesor>()
+                .HasOne(i => i.Profesor)
+                .WithMany()
+                .HasForeignKey("idProfesor")
+                .OnDelete(DeleteBehavior.Restrict);
+
+
+
+
         }
     }
 }

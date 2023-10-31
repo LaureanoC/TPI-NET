@@ -31,9 +31,9 @@ namespace Escritorio.PersonaForm
             BaseAddress = new Uri("http://localhost:5297")
         };
 
-        private void ListadoPersona_Load(object sender, EventArgs e)
+        private async void ListadoPersona_Load(object sender, EventArgs e)
         {
-            listar();
+            await listar();
         }
 
         private async void agregarBtn_Click(object sender, EventArgs e)

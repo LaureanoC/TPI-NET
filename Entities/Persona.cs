@@ -16,11 +16,13 @@
 
         public DateTime FechaNacimiento { get; set; }
 
-        public int TipoPersona { get; set; }
+        public string TipoPersona { get; set; }
 
         public string Legajo { get; set; }
 
         public Plan Plan { get; set; }
+
+        public ICollection<Curso> Cursos { get; set; }
 
 
     }

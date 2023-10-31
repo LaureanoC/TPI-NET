@@ -46,6 +46,7 @@
             inputComboPlan = new ComboBox();
             label9 = new Label();
             inputEmail = new TextBox();
+            inputTipo = new ComboBox();
             SuspendLayout();
             // 
             // label1
@@ -139,7 +140,7 @@
             // 
             // aggBtn
             // 
-            aggBtn.Location = new Point(103, 288);
+            aggBtn.Location = new Point(103, 327);
             aggBtn.Name = "aggBtn";
             aggBtn.Size = new Size(100, 23);
             aggBtn.TabIndex = 10;
@@ -196,11 +197,21 @@
             inputEmail.Size = new Size(100, 23);
             inputEmail.TabIndex = 16;
             // 
+            // inputTipo
+            // 
+            inputTipo.FormattingEnabled = true;
+            inputTipo.Items.AddRange(new object[] { "Profesor", "Alumno" });
+            inputTipo.Location = new Point(103, 280);
+            inputTipo.Name = "inputTipo";
+            inputTipo.Size = new Size(100, 23);
+            inputTipo.TabIndex = 17;
+            // 
             // AltaPersona
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(318, 362);
+            Controls.Add(inputTipo);
             Controls.Add(inputEmail);
             Controls.Add(label9);
             Controls.Add(inputComboPlan);
@@ -246,5 +257,6 @@
         private ComboBox inputComboPlan;
         private Label label9;
         private TextBox inputEmail;
+        private ComboBox inputTipo;
     }
 }

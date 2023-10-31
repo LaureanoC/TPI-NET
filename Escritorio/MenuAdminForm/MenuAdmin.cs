@@ -1,6 +1,7 @@
 ﻿using Escritorio.ComisionForm;
 using Escritorio.CursoForm;
 using Escritorio.Especialidad;
+using Escritorio.InscripcionesAlumnosForm;
 using Escritorio.MateriaForm;
 using Escritorio.PersonaForm;
 using Escritorio.PlanForm;
@@ -63,6 +64,14 @@ namespace Escritorio.MenuAdminForm
             ListadoCurso form = new ListadoCurso();
             form.Owner = this;
             form.ShowDialog();
+        }
+
+        private void btnIAlumno_Click(object sender, EventArgs e)
+        {
+            ListadoInscAlumno form = new ListadoInscAlumno();
+            form.Owner = this;
+            form.ShowDialog();
+
         }
     }
 }

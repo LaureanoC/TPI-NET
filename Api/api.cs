@@ -3,7 +3,7 @@ using Data;
 using Dtos;
 using Entities;
 using Microsoft.EntityFrameworkCore;
-using System.Xml;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -522,6 +522,18 @@ app.MapGet("/inscripcionesalumnos/{id}", async (int id, UniversidadContext conte
     .FirstOrDefaultAsync();
 
     return Results.Ok(ins);
+
+});
+
+app.MapGet("/inscripcionesalumnoscantidad/{idCurso}", async (int idCurso, UniversidadContext context) =>
+{
+    var ins = context.InscripcionesAlumnos;
+
+    var filtro = from i in ins where i.Curso.Id == idCurso select i;
+
+    var cantidad = filtro.Count();
+
+    return Results.Ok(cantidad);
 
 });
 

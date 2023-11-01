@@ -45,7 +45,7 @@ namespace Escritorio.InscripcionesAlumnosForm
 
         }
 
-    
+
 
         private async void button1_Click(object sender, EventArgs e)
         {
@@ -56,27 +56,42 @@ namespace Escritorio.InscripcionesAlumnosForm
                 Condicion = "Inscripto",
                 Nota = null,
             };
-
-            //validar que haya cupo
-            int idCurso = Convert.ToInt32(comboCurso.SelectedValue);
-
-            var curso = await _httpClient.GetFromJsonAsync<Curso>($"cursos/{idCurso}");
-
-            var cupo = curso.Cupo;
-
-            var cantidad = await _httpClient.GetFromJsonAsync<int>($"inscripcionesalumnoscantidad/{idCurso}");
-
             
+            //validar que no esté inscripto
+            int idCurso = Convert.ToInt32(comboCurso.SelectedValue);
+            int idPersona = Convert.ToInt32(comboAlumno.SelectedValue);
+            var estaInscripto = await _httpClient.GetFromJsonAsync<bool>($"inscripcionesalumnosestainscripto/{idCurso}/{idPersona}");
 
-            if ( cantidad < cupo )
+            if(estaInscripto)
             {
-                await _httpClient.PostAsJsonAsync("inscripcionesalumnos", ia);
+                MessageBox.Show("Ya se encuentra inscripto");
+                
             } else
             {
-                MessageBox.Show("No hay cupo disponible");
+                //validar que haya cupo
+
+
+                var curso = await _httpClient.GetFromJsonAsync<Curso>($"cursos/{idCurso}");
+
+                var cupo = curso.Cupo;
+
+                var cantidad = await _httpClient.GetFromJsonAsync<int>($"inscripcionesalumnoscantidad/{idCurso}");
+
+
+
+                if (cantidad < cupo)
+                {
+                    await _httpClient.PostAsJsonAsync("inscripcionesalumnos", ia);
+                }
+                else
+                {
+                    MessageBox.Show("No hay cupo disponible");
+                }
             }
 
-            
+           
+
+
 
             this.Dispose();
 

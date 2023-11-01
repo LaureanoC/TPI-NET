@@ -32,6 +32,7 @@
             btnAdd = new Button();
             btnMod = new Button();
             btnDelete = new Button();
+            button1 = new Button();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
             // 
@@ -72,11 +73,22 @@
             btnDelete.Text = "Eliminar";
             btnDelete.UseVisualStyleBackColor = true;
             // 
+            // button1
+            // 
+            button1.Location = new Point(457, 301);
+            button1.Name = "button1";
+            button1.Size = new Size(88, 23);
+            button1.TabIndex = 4;
+            button1.Text = "Registrar nota";
+            button1.UseVisualStyleBackColor = true;
+            button1.Click += button1_Click;
+            // 
             // ListadoInscAlumno
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 336);
+            Controls.Add(button1);
             Controls.Add(btnDelete);
             Controls.Add(btnMod);
             Controls.Add(btnAdd);
@@ -94,5 +106,6 @@
         private Button btnAdd;
         private Button btnMod;
         private Button btnDelete;
+        private Button button1;
     }
 }

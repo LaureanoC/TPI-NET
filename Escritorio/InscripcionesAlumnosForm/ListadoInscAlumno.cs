@@ -43,5 +43,14 @@ namespace Escritorio.InscripcionesAlumnosForm
 
             await listar();
         }
+
+        private async void button1_Click(object sender, EventArgs e)
+        {
+            RegistrarNotaAlumno form = new RegistrarNotaAlumno();
+            form.Owner = this;
+            form.ShowDialog();
+
+            await listar();
+        }
     }
 }

@@ -444,6 +444,27 @@ app.MapGet("/cursos/{id}", async (int id, UniversidadContext context) =>
 
     });
 
+app.MapGet("cursospersona/{idPersona}", async (int idPersona, UniversidadContext context) =>
+{
+    
+    var cursos = await context.InscripcionesAlumnos
+    .Where(c => c.Alumno.Id == idPersona)
+    .Select(c => new
+    {
+        Id = c.Id,
+        Alumno = new Persona { Id = c.Alumno.Id },
+        Curso = new Curso() { Id = c.Curso.Id, Anio = c.Curso.Anio },
+        Condicion = c.Condicion,
+        Nota = c.Nota
+    })
+    .ToListAsync(); ;
+
+    
+    return Results.Ok(cursos);
+
+
+});
+
 
 app.MapPut("/cursos/{id}", async (Curso c, int id, UniversidadContext context) =>
 {
@@ -515,13 +536,34 @@ app.MapGet("/inscripcionesalumnos/{id}", async (int id, UniversidadContext conte
     {
         Id = c.Id,
         Alumno = new Persona { Id = c.Alumno.Id },
-        Curso = new Curso() { Id = c.Curso.Id },
+        Curso = new Curso() { Id = c.Curso.Id, Anio = c.Curso.Anio },
         Condicion = c.Condicion,
         Nota = c.Nota
     })
     .FirstOrDefaultAsync();
 
     return Results.Ok(ins);
+
+});
+
+app.MapGet("inscripcionesalumnoscurso/{idPersona}", async (int idPersona, UniversidadContext context) =>
+{
+
+    var cursos = await context.InscripcionesAlumnos
+    .Where(c => c.Alumno.Id == idPersona)
+    .Select(c => new
+    {
+        Id = c.Id,
+        Alumno = new Persona { Id = c.Alumno.Id },
+        Curso = new Curso() { Id = c.Curso.Id, Anio = c.Curso.Anio },
+        Condicion = c.Condicion,
+        Nota = c.Nota
+    })
+    .FirstOrDefaultAsync(); ;
+
+
+    return Results.Ok(cursos);
+
 
 });
 
@@ -534,6 +576,34 @@ app.MapGet("/inscripcionesalumnoscantidad/{idCurso}", async (int idCurso, Univer
     var cantidad = filtro.Count();
 
     return Results.Ok(cantidad);
+
+});
+
+app.MapGet("/inscripcionesalumnosestainscripto/{idCurso}/{idPersona}", async (int idCurso, int idPersona, UniversidadContext context) =>
+{
+    var ins = context.InscripcionesAlumnos;
+
+    var filtro = from i in ins where i.Curso.Id == idCurso & i.Alumno.Id == idPersona  select i;
+
+    var inscripto = false;
+
+    if (filtro.Count() > 0)
+    {
+        inscripto = true;
+    }
+    
+    return Results.Ok(inscripto);
+
+});
+
+app.MapGet("/inscripcionesalumnos/{idCurso}/{idPersona}", async (int idCurso, int idPersona, UniversidadContext context) =>
+{
+    var ins = context.InscripcionesAlumnos;
+
+    var filtro = from i in ins where i.Curso.Id == idCurso & i.Alumno.Id == idPersona select i;
+
+
+    return Results.Ok(filtro);
 
 });
 

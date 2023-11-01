@@ -49,9 +49,9 @@ namespace Escritorio.InscripcionesAlumnosForm
         {
             InscripcionAlumno ia = new InscripcionAlumno()
             {
-                Condicion = "Inscripto",
-                Curso = new Curso() { Id = Convert.ToInt32(comboCurso.SelectedValue) },
                 Alumno = new Persona() { Id = Convert.ToInt32(comboAlumno.SelectedValue) },
+                Curso = new Curso() { Id = Convert.ToInt32(comboCurso.SelectedValue) },
+                Condicion = "Inscripto",
                 Nota = null,
             };
 

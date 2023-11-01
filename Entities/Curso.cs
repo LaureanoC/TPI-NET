@@ -17,7 +17,6 @@ namespace Entities
 
         public int Cupo { get; set; }
 
-
         public ICollection<Persona> Personas { get; set; }
     }
 }

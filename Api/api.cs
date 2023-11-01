@@ -3,6 +3,7 @@ using Data;
 using Dtos;
 using Entities;
 using Microsoft.EntityFrameworkCore;
+using System.Xml;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -484,7 +485,7 @@ app.MapPost("/inscripcionesalumnos", async(UniversidadContext context, Inscripci
     context.InscripcionesAlumnos.Add(ia);
     await context.SaveChangesAsync();
 
-    return Results.Ok(ia);
+    return Results.Ok();
 
 });
 
@@ -499,7 +500,7 @@ app.MapGet("/inscripcionesalumnos", async(UniversidadContext context) =>
             AñoCurso = c.Curso.Anio,
             Alumno = c.Alumno.Nombre +" " +c.Alumno.Apellido,
             Condicion = c.Condicion,
-            Nota = (double)c.Nota
+            Nota = c.Nota
         })
         .ToListAsync();
 

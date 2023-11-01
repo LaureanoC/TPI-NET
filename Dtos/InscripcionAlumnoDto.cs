@@ -16,6 +16,6 @@ namespace Dtos
 
         public string Condicion { get; set; }
 
-        public double Nota { get; set; }
+        public double ?Nota { get; set; }
     }
 }

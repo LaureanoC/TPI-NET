@@ -14,6 +14,8 @@ namespace Dtos
 
         public int AñoCurso { get; set; }
 
+        public int IdCurso { get; set; }
+
         public string Condicion { get; set; }
 
         public double ?Nota { get; set; }

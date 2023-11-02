@@ -452,10 +452,11 @@ app.MapGet("cursospersona/{idPersona}", async (int idPersona, UniversidadContext
     .Select(c => new
     {
         Id = c.Id,
-        Alumno = new Persona { Id = c.Alumno.Id },
-        Curso = new Curso() { Id = c.Curso.Id, Anio = c.Curso.Anio },
+        Alumno = c.Alumno.Nombre + " " + c.Alumno.Apellido,
         Condicion = c.Condicion,
-        Nota = c.Nota
+        Nota = c.Nota,
+        IdCurso = c.Curso.Id,
+        AñoCurso = c.Curso.Anio,
     })
     .ToListAsync(); ;
 
@@ -621,7 +622,8 @@ app.MapPut("/inscripcionesalumnos/{id}", async (InscripcionAlumno ia, int id, Un
     inscripcion.Nota = ia.Nota;
 
     await context.SaveChangesAsync();
-    return Results.NoContent();
+
+    return Results.Ok(inscripcion);
 });
 
 app.MapDelete("/inscripcionesalumnos/{id}", async (int id, UniversidadContext context) =>

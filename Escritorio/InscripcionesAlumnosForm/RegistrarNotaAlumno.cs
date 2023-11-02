@@ -33,7 +33,6 @@ namespace Escritorio.InscripcionesAlumnosForm
 
             comboAlumno.Text = "Seleccionar alumno";
 
-
             var alumnos = await _httpClient.GetFromJsonAsync<IEnumerable<Persona>>("alumnos");
 
             comboAlumno.DataSource = alumnos;
@@ -47,25 +46,32 @@ namespace Escritorio.InscripcionesAlumnosForm
 
         private async void button1_Click(object sender, EventArgs e)
         {
-            int id = Convert.ToInt32(comboAlumno.SelectedValue);
-
-            InscripcionAlumno insc = new InscripcionAlumno()
+            try
             {
-                Id = id,
-                Alumno = new Persona() { Id = Convert.ToInt32(comboAlumno.SelectedValue) },
-                Curso = new Curso() { Id = Convert.ToInt32(comboCurso.SelectedValue) },
-                Nota = Convert.ToDouble(inputNota.Text),
-                Condicion = CondicionAlumno(Convert.ToDouble(inputNota.Text))
-            };
+                int id = Convert.ToInt32(comboAlumno.SelectedValue);
 
-            var inscripcion = await _httpClient.GetFromJsonAsync<InscripcionAlumno>($"inscripcionesalumnoscurso/{id}");
-            
-            if (inscripcion != null)
+                InscripcionAlumno insc = new InscripcionAlumno()
+                {
+                    Id = id,
+                    Alumno = new Persona() { Id = Convert.ToInt32(comboAlumno.SelectedValue) },
+                    Curso = new Curso() { Id = Convert.ToInt32(comboCurso.SelectedValue) },
+                    Nota = Convert.ToDouble(inputNota.Text),
+                    Condicion = CondicionAlumno(Convert.ToDouble(inputNota.Text))
+                };
+
+                var inscripcion = await _httpClient.GetFromJsonAsync<InscripcionAlumno>($"inscripcionesalumnoscurso/{id}");
+
+                if (inscripcion != null)
+                {
+                    await _httpClient.PutAsJsonAsync($"inscripcionesalumnos/{inscripcion.Id}", insc);
+                }
+
+                this.Dispose();
+            } catch(Exception ex) 
             {
-                await _httpClient.PutAsJsonAsync($"inscripcionesalumnos/{inscripcion.Id}", insc);
+                MessageBox.Show("Ha ocurrido un error");
             }
-
-            this.Dispose();
+            
 
             
 
@@ -83,14 +89,22 @@ namespace Escritorio.InscripcionesAlumnosForm
 
         private async void comboAlumno_DropDownClosed(object sender, EventArgs e)
         {
+            comboCurso.Enabled = false;
+
+            comboCurso.DataSource = null;
+
             int idPersona = Convert.ToInt32(comboAlumno.SelectedValue);
-            var cursos = await _httpClient.GetFromJsonAsync<IEnumerable<InscripcionAlumno>>($"cursospersona/{idPersona}");
+            var cursos = await _httpClient.GetFromJsonAsync<IEnumerable<InscripcionAlumnoDto>>($"cursospersona/{idPersona}");
 
-            comboCurso.Enabled = true;
+            if (cursos.Count() != 0)
+            {
+                comboCurso.Enabled = true;
 
-            comboCurso.DataSource = cursos;
-            comboCurso.DisplayMember = "Curso.Anio";
-            comboCurso.ValueMember = "Id";
+                comboCurso.DataSource = cursos;
+                comboCurso.DisplayMember = "AñoCurso";
+                comboCurso.ValueMember = "IdCurso";
+            }
+            
 
         }
     }

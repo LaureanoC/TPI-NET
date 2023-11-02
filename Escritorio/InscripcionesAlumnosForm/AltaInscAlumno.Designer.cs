@@ -51,7 +51,7 @@
             comboAlumno.FormattingEnabled = true;
             comboAlumno.Location = new Point(111, 125);
             comboAlumno.Name = "comboAlumno";
-            comboAlumno.Size = new Size(121, 23);
+            comboAlumno.Size = new Size(97, 23);
             comboAlumno.TabIndex = 3;
             // 
             // comboCurso
@@ -59,7 +59,7 @@
             comboCurso.FormattingEnabled = true;
             comboCurso.Location = new Point(111, 83);
             comboCurso.Name = "comboCurso";
-            comboCurso.Size = new Size(121, 23);
+            comboCurso.Size = new Size(208, 23);
             comboCurso.TabIndex = 4;
             // 
             // label1

@@ -38,7 +38,7 @@ namespace Escritorio.InscripcionesAlumnosForm
             var cursos = await _httpClient.GetFromJsonAsync<IEnumerable<CursoDto>>("cursos");
 
             comboCurso.DataSource = cursos;
-            comboCurso.DisplayMember = "Año";
+            comboCurso.DisplayMember = "Descripcion";
             comboCurso.ValueMember = "Id";
 
 
@@ -56,17 +56,18 @@ namespace Escritorio.InscripcionesAlumnosForm
                 Condicion = "Inscripto",
                 Nota = null,
             };
-            
+
             //validar que no esté inscripto
             int idCurso = Convert.ToInt32(comboCurso.SelectedValue);
             int idPersona = Convert.ToInt32(comboAlumno.SelectedValue);
             var estaInscripto = await _httpClient.GetFromJsonAsync<bool>($"inscripcionesalumnosestainscripto/{idCurso}/{idPersona}");
 
-            if(estaInscripto)
+            if (estaInscripto)
             {
                 MessageBox.Show("Ya se encuentra inscripto");
-                
-            } else
+
+            }
+            else
             {
                 //validar que haya cupo
 
@@ -89,7 +90,7 @@ namespace Escritorio.InscripcionesAlumnosForm
                 }
             }
 
-           
+
 
 
 

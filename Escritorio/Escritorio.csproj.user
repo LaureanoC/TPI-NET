@@ -37,6 +37,9 @@
     <Compile Update="InscripcionesAlumnosForm\ListadoInscAlumno.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="InscripcionesAlumnosForm\UpdateInscAlumno.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="MateriaForm\AltaMateria.cs">
       <SubType>Form</SubType>
     </Compile>

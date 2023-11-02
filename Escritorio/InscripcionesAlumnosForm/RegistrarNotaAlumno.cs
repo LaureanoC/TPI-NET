@@ -31,35 +31,31 @@ namespace Escritorio.InscripcionesAlumnosForm
 
             comboCurso.Enabled = false;
 
-            comboAlumno.Text = "Seleccionar alumno";
-
             var alumnos = await _httpClient.GetFromJsonAsync<IEnumerable<Persona>>("alumnos");
 
             comboAlumno.DataSource = alumnos;
             comboAlumno.DisplayMember = "Legajo";
             comboAlumno.ValueMember = "Id";
 
-
         }
-
-
 
         private async void button1_Click(object sender, EventArgs e)
         {
             try
             {
-                int id = Convert.ToInt32(comboAlumno.SelectedValue);
+                int idPersona = Convert.ToInt32(comboAlumno.SelectedValue);
+                int idCurso = Convert.ToInt32(comboCurso.SelectedValue);
+               
+                var inscripcion = await _httpClient.GetFromJsonAsync<InscripcionAlumno>($"inscripcionesalumnoscurso/{idCurso}/{idPersona}");
 
                 InscripcionAlumno insc = new InscripcionAlumno()
                 {
-                    Id = id,
+                    Id = inscripcion.Id,
                     Alumno = new Persona() { Id = Convert.ToInt32(comboAlumno.SelectedValue) },
                     Curso = new Curso() { Id = Convert.ToInt32(comboCurso.SelectedValue) },
                     Nota = Convert.ToDouble(inputNota.Text),
                     Condicion = CondicionAlumno(Convert.ToDouble(inputNota.Text))
                 };
-
-                var inscripcion = await _httpClient.GetFromJsonAsync<InscripcionAlumno>($"inscripcionesalumnoscurso/{id}");
 
                 if (inscripcion != null)
                 {
@@ -101,7 +97,7 @@ namespace Escritorio.InscripcionesAlumnosForm
                 comboCurso.Enabled = true;
 
                 comboCurso.DataSource = cursos;
-                comboCurso.DisplayMember = "AñoCurso";
+                comboCurso.DisplayMember = "DescripcionCurso";
                 comboCurso.ValueMember = "IdCurso";
             }
             

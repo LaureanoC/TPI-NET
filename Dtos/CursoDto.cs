@@ -10,10 +10,8 @@ namespace Dtos
     {
         public int Id { get; set; }
 
-        public string DescripcionMateria { get; set; }
-
-        public string DescripcionComision { get; set; }
-
+        public string Descripcion { get; set; }
+        
         public int Año { get; set; }
 
         public int Cupo { get; set; }

@@ -52,5 +52,17 @@ namespace Escritorio.InscripcionesAlumnosForm
 
             await listar();
         }
+
+        private async void btnMod_Click(object sender, EventArgs e)
+        {
+            int idInscripcion = Convert.ToInt32(dataGridView1.SelectedRows[0].Cells[0].Value);
+            int idCurso = Convert.ToInt32(dataGridView1.SelectedRows[0].Cells[4].Value);
+
+            UpdateInscAlumno form = new UpdateInscAlumno(idInscripcion, idCurso);
+            form.Owner = this;
+            form.ShowDialog();
+
+            await listar();
+        }
     }
 }

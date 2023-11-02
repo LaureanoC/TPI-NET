@@ -411,9 +411,9 @@ app.MapGet("/cursos", async (UniversidadContext context) =>
         .Select(c => new CursoDto()
         {
             Id = c.Id,
-            DescripcionMateria = c.Materia.Descripcion,
+            Descripcion = c.Materia.Descripcion + "-" + c.Comision.Descripcion + "-" + c.Anio,
             Año = c.Anio,
-            DescripcionComision = c.Comision.Descripcion,
+            
             Cupo = c.Cupo
         })
         .ToListAsync(); ;
@@ -452,11 +452,13 @@ app.MapGet("cursospersona/{idPersona}", async (int idPersona, UniversidadContext
     .Select(c => new
     {
         Id = c.Id,
-        Alumno = c.Alumno.Nombre + " " + c.Alumno.Apellido,
-        Condicion = c.Condicion,
-        Nota = c.Nota,
+        IdAlumno = c.Alumno.Id,
         IdCurso = c.Curso.Id,
+        DescripcionCurso = c.Curso.Materia.Descripcion + "-" + c.Curso.Comision.Descripcion + "-" + c.Curso.Anio,
         AñoCurso = c.Curso.Anio,
+        Legajo = c.Alumno.Legajo,
+        Condicion = c.Condicion,
+        Nota = c.Nota
     })
     .ToListAsync(); ;
 
@@ -519,8 +521,11 @@ app.MapGet("/inscripcionesalumnos", async(UniversidadContext context) =>
         .Select(c => new InscripcionAlumnoDto()
         {
             Id = c.Id,
+            IdAlumno = c.Alumno.Id,
+            IdCurso = c.Curso.Id,
+            DescripcionCurso = c.Curso.Materia.Descripcion + "-" + c.Curso.Comision.Descripcion + "-" + c.Curso.Anio,
             AñoCurso = c.Curso.Anio,
-            Alumno = c.Alumno.Nombre +" " +c.Alumno.Apellido,
+            Legajo = c.Alumno.Legajo,
             Condicion = c.Condicion,
             Nota = c.Nota
         })
@@ -536,8 +541,11 @@ app.MapGet("/inscripcionesalumnos/{id}", async (int id, UniversidadContext conte
     .Select(c => new
     {
         Id = c.Id,
-        Alumno = new Persona { Id = c.Alumno.Id },
-        Curso = new Curso() { Id = c.Curso.Id, Anio = c.Curso.Anio },
+        IdAlumno = c.Alumno.Id,
+        IdCurso = c.Curso.Id,
+        DescripcionCurso = c.Curso.Materia.Descripcion + "-" + c.Curso.Comision.Descripcion + "-" + c.Curso.Anio,
+        AñoCurso = c.Curso.Anio,
+        Legajo = c.Alumno.Legajo,
         Condicion = c.Condicion,
         Nota = c.Nota
     })
@@ -547,11 +555,11 @@ app.MapGet("/inscripcionesalumnos/{id}", async (int id, UniversidadContext conte
 
 });
 
-app.MapGet("inscripcionesalumnoscurso/{idPersona}", async (int idPersona, UniversidadContext context) =>
+app.MapGet("inscripcionesalumnoscurso/{idCurso}/{idPersona}", async (int idPersona, int idCurso, UniversidadContext context) =>
 {
 
     var cursos = await context.InscripcionesAlumnos
-    .Where(c => c.Alumno.Id == idPersona)
+    .Where(c => c.Alumno.Id == idPersona & c.Curso.Id == idCurso)
     .Select(c => new
     {
         Id = c.Id,

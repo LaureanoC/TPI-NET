@@ -10,8 +10,10 @@ namespace Dtos
     {
         public int Id { get; set; }
 
-        public string Alumno { get; set; }
+        public int IdAlumno { get; set; }
+        public string Legajo { get; set; }
 
+        public string DescripcionCurso { get; set; }
         public int AñoCurso { get; set; }
 
         public int IdCurso { get; set; }

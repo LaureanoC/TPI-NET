@@ -32,6 +32,7 @@
             comboCurso = new ComboBox();
             comboAlumno = new ComboBox();
             inputNota = new TextBox();
+            label1 = new Label();
             SuspendLayout();
             // 
             // button1
@@ -46,34 +47,46 @@
             // 
             // comboCurso
             // 
+            comboCurso.DropDownStyle = ComboBoxStyle.DropDownList;
             comboCurso.FormattingEnabled = true;
-            comboCurso.Location = new Point(83, 92);
+            comboCurso.Location = new Point(23, 96);
             comboCurso.Name = "comboCurso";
-            comboCurso.Size = new Size(121, 23);
+            comboCurso.Size = new Size(239, 23);
             comboCurso.TabIndex = 1;
             // 
             // comboAlumno
             // 
+            comboAlumno.DropDownStyle = ComboBoxStyle.DropDownList;
             comboAlumno.FormattingEnabled = true;
-            comboAlumno.Location = new Point(83, 52);
+            comboAlumno.Location = new Point(23, 52);
             comboAlumno.Name = "comboAlumno";
-            comboAlumno.Size = new Size(121, 23);
+            comboAlumno.Size = new Size(239, 23);
             comboAlumno.TabIndex = 2;
             comboAlumno.DropDownClosed += comboAlumno_DropDownClosed;
             // 
             // inputNota
             // 
-            inputNota.Location = new Point(83, 135);
+            inputNota.Location = new Point(23, 135);
             inputNota.Name = "inputNota";
             inputNota.PlaceholderText = "Nota";
-            inputNota.Size = new Size(121, 23);
+            inputNota.Size = new Size(239, 23);
             inputNota.TabIndex = 3;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Location = new Point(104, 19);
+            label1.Name = "label1";
+            label1.Size = new Size(80, 15);
+            label1.TabIndex = 4;
+            label1.Text = "Registrar nota";
             // 
             // RegistrarNotaAlumno
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(287, 270);
+            Controls.Add(label1);
             Controls.Add(inputNota);
             Controls.Add(comboAlumno);
             Controls.Add(comboCurso);
@@ -91,5 +104,6 @@
         private ComboBox comboCurso;
         private ComboBox comboAlumno;
         private TextBox inputNota;
+        private Label label1;
     }
 }

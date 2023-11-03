@@ -40,18 +40,29 @@ namespace Escritorio.CursoForm
 
         private async void btnAdd_Click(object sender, EventArgs e)
         {
-            var curso = new Curso()
+
+            try
             {
-                Anio = Convert.ToInt32(inputAnio.Text),
-                Cupo = Convert.ToInt32(inputCupo.Text),
-                Materia = new Materia() { Id = Convert.ToInt32(comboMateria.SelectedValue) },
-                Comision = new Comision() { Id = Convert.ToInt32(comboComision.SelectedValue) }
+                var curso = new Curso()
+                {
+                    Anio = Convert.ToInt32(inputAnio.Text),
+                    Cupo = Convert.ToInt32(inputCupo.Text),
+                    Materia = new Materia() { Id = Convert.ToInt32(comboMateria.SelectedValue) },
+                    Comision = new Comision() { Id = Convert.ToInt32(comboComision.SelectedValue) }
 
-            };
+                };
 
-            await _httpClient.PostAsJsonAsync("cursos", curso);
+                await _httpClient.PostAsJsonAsync("cursos", curso);
 
-            this.Dispose();
+                this.Dispose();
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Ingrese correctamente el año y cupo.");
+            }
+
+
         }
     }
 }

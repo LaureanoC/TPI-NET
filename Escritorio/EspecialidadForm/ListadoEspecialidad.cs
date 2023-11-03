@@ -47,32 +47,58 @@ namespace Escritorio.Especialidad
 
         private async void button3_Click(object sender, EventArgs e)
         {
-            int id = Convert.ToInt32(this.dataEspecialidad.SelectedRows[0].Cells[0].Value);
+            
+            try
+            {
+                int id = Convert.ToInt32(this.dataEspecialidad.SelectedRows[0].Cells[0].Value);
 
-            var especialidad = await _httpClient.DeleteAsync($"especialidades/{id}");
+                var especialidad = await _httpClient.DeleteAsync($"especialidades/{id}");
 
-            await listar();
+                await listar();
+
+            } catch (Exception ex)
+            {
+                MessageBox.Show("Debe seleccionar una fila");
+            }
+            
 
 
         }
 
         private async void button2_Click(object sender, EventArgs e)
         {
-            int id = Convert.ToInt32(this.dataEspecialidad.SelectedRows[0].Cells[0].Value);
+            
+            try
+            {
+                int id = Convert.ToInt32(this.dataEspecialidad.SelectedRows[0].Cells[0].Value);
 
-            UpdateEspecialidad formMod = new UpdateEspecialidad(id);
-            formMod.Owner = this;
-            formMod.ShowDialog();
+                UpdateEspecialidad formMod = new UpdateEspecialidad(id);
+                formMod.Owner = this;
+                formMod.ShowDialog();
 
-            await listar();
+                await listar();
+
+            } catch(Exception ex)
+            {
+                MessageBox.Show("Debe seleccionar una fila");
+            }
+            
+            
         }
 
         private void btnGet_Click(object sender, EventArgs e)
         {
-            
-            var descripcion = this.dataEspecialidad.SelectedRows[0].Cells[1].Value;
+            try
+            {
+                var descripcion = this.dataEspecialidad.SelectedRows[0].Cells[1].Value;
 
-            MessageBox.Show("Especialidad: " + descripcion);
+                MessageBox.Show("Especialidad: " + descripcion);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Debe seleccionar una fila");
+            }
+           
         }
     }
 }

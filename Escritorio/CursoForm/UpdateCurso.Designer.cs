@@ -41,6 +41,7 @@
             // 
             // comboMateria
             // 
+            comboMateria.DropDownStyle = ComboBoxStyle.DropDownList;
             comboMateria.FormattingEnabled = true;
             comboMateria.Location = new Point(161, 49);
             comboMateria.Name = "comboMateria";
@@ -49,6 +50,7 @@
             // 
             // comboComision
             // 
+            comboComision.DropDownStyle = ComboBoxStyle.DropDownList;
             comboComision.FormattingEnabled = true;
             comboComision.Location = new Point(161, 81);
             comboComision.Name = "comboComision";

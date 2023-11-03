@@ -64,12 +64,12 @@
             // 
             // comboPlan
             // 
+            comboPlan.DropDownStyle = ComboBoxStyle.DropDownList;
             comboPlan.FormattingEnabled = true;
             comboPlan.Location = new Point(21, 110);
             comboPlan.Name = "comboPlan";
             comboPlan.Size = new Size(121, 23);
             comboPlan.TabIndex = 4;
-           
             // 
             // label3
             // 

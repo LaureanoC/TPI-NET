@@ -36,26 +36,36 @@ namespace Escritorio.MateriaForm
 
         private async void button1_Click(object sender, EventArgs e)
         {
-            int idPlan = Convert.ToInt32(comboBox1.SelectedValue);
-
-
-            var plan = new Plan()
+            try
             {
-                Id = idPlan
-            };
+                int idPlan = Convert.ToInt32(comboBox1.SelectedValue);
 
-            Materia m = new Materia()
+
+                var plan = new Plan()
+                {
+                    Id = idPlan
+                };
+
+                Materia m = new Materia()
+                {
+                    Plan = plan,
+                    Descripcion = inputMateria.Text,
+                    HsSemanales = Convert.ToInt32(inputHorasSemanales.Text),
+                    HsTotales = Convert.ToInt32(inputHorasTotales.Text)
+
+                };
+
+                await _httpClient.PostAsJsonAsync("materias", m);
+
+                this.Dispose();
+
+            }
+            catch (Exception ex)
             {
-                Plan = plan,
-                Descripcion = inputMateria.Text,
-                HsSemanales = Convert.ToInt32(inputHorasSemanales.Text),
-                HsTotales = Convert.ToInt32(inputHorasTotales.Text)
+                MessageBox.Show("Ingrese correctamente las horas");
+            }
 
-            };
 
-            await _httpClient.PostAsJsonAsync("materias", m);
-
-            this.Dispose();
 
         }
     }

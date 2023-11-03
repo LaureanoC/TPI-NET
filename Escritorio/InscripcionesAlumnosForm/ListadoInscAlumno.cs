@@ -55,14 +55,39 @@ namespace Escritorio.InscripcionesAlumnosForm
 
         private async void btnMod_Click(object sender, EventArgs e)
         {
-            int idInscripcion = Convert.ToInt32(dataGridView1.SelectedRows[0].Cells[0].Value);
-            int idCurso = Convert.ToInt32(dataGridView1.SelectedRows[0].Cells[4].Value);
+            try
+            {
+                int idInscripcion = Convert.ToInt32(dataGridView1.SelectedRows[0].Cells[0].Value);
+                int idCurso = Convert.ToInt32(dataGridView1.SelectedRows[0].Cells[5].Value);
 
-            UpdateInscAlumno form = new UpdateInscAlumno(idInscripcion, idCurso);
-            form.Owner = this;
-            form.ShowDialog();
+                UpdateInscAlumno form = new UpdateInscAlumno(idInscripcion, idCurso);
+                form.Owner = this;
+                form.ShowDialog();
 
-            await listar();
+                await listar();
+
+            } catch(Exception ex)
+            {
+                MessageBox.Show("Debe seleccionar una fila");
+            }
+        }
+
+        private async void btnDelete_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                int idInscripcion = Convert.ToInt32(dataGridView1.SelectedRows[0].Cells[0].Value);
+
+                await _httpClient.DeleteAsync($"inscripcionesalumnos/{idInscripcion}");
+
+                await listar();
+
+
+            } catch (Exception ex)
+            {
+                MessageBox.Show("Debe seleccionar una fila");
+            }
+            
         }
     }
 }

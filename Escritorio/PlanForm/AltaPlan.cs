@@ -38,15 +38,15 @@ namespace Escritorio.PlanForm
             string desc = inputDesc.Text;
             int idEspecialidad = Convert.ToInt32(comboEspecialidad.SelectedValue);
 
-            Entities.Especialidad esp = new Entities.Especialidad() 
-            { 
+            Entities.Especialidad esp = new Entities.Especialidad()
+            {
                 Id = idEspecialidad
             };
 
-            var plan = new Plan() 
+            var plan = new Plan()
             {
-               Descripcion = desc,
-               Especialidad = esp
+                Descripcion = desc,
+                Especialidad = esp
             };
 
             await _httpClient.PostAsJsonAsync("planes", plan);

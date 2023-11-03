@@ -45,23 +45,40 @@ namespace Escritorio.ComisionForm
 
         private async void btnModificar_Click(object sender, EventArgs e)
         {
-            int id = Convert.ToInt32(this.dataGridView1.SelectedRows[0].Cells[0].Value);
+            try
+            {
 
-            UpdateComision form = new UpdateComision(id);
-            form.Owner = this;
-            form.ShowDialog();
+                int id = Convert.ToInt32(this.dataGridView1.SelectedRows[0].Cells[0].Value);
 
-            await listar();
+                UpdateComision form = new UpdateComision(id);
+                form.Owner = this;
+                form.ShowDialog();
+
+                await listar();
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Debe seleccionar una fila");
+            }
 
         }
 
         private async void btnEliminar_Click(object sender, EventArgs e)
         {
-            int id = Convert.ToInt32(this.dataGridView1.SelectedRows[0].Cells[0].Value);
+            try
+            {
+                int id = Convert.ToInt32(this.dataGridView1.SelectedRows[0].Cells[0].Value);
 
-            var especialidad = await _httpClient.DeleteAsync($"comisiones/{id}");
+                var especialidad = await _httpClient.DeleteAsync($"comisiones/{id}");
 
-            await listar();
+                await listar();
+            } 
+            
+            catch (ArgumentOutOfRangeException ex)
+            {
+                MessageBox.Show("Debe seleccionar una fila");
+            }
         }
     }
 }

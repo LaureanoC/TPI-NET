@@ -75,6 +75,7 @@
             // 
             // comboEspecialidad
             // 
+            comboEspecialidad.DropDownStyle = ComboBoxStyle.DropDownList;
             comboEspecialidad.FormattingEnabled = true;
             comboEspecialidad.Location = new Point(109, 138);
             comboEspecialidad.Name = "comboEspecialidad";

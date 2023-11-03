@@ -28,27 +28,37 @@ namespace Escritorio.MateriaForm
 
         private async void btnModificar_Click(object sender, EventArgs e)
         {
-            int idPlan = Convert.ToInt32(comboBox1.SelectedValue);
-
-
-            var plan = new Plan()
+            try
             {
-                Id = idPlan
-            };
+                int idPlan = Convert.ToInt32(comboBox1.SelectedValue);
 
-            Materia m = new Materia()
+
+                var plan = new Plan()
+                {
+                    Id = idPlan
+                };
+
+                Materia m = new Materia()
+                {
+                    Id = this.id,
+                    Plan = plan,
+                    Descripcion = inputMateria.Text,
+                    HsSemanales = Convert.ToInt32(inputHorasSemanales.Text),
+                    HsTotales = Convert.ToInt32(inputHorasTotales.Text)
+
+                };
+
+                await _httpClient.PutAsJsonAsync($"materias/{this.id}", m); ;
+
+                this.Dispose();
+
+            }
+            catch (Exception ex)
             {
-                Id = this.id,
-                Plan = plan,
-                Descripcion = inputMateria.Text,
-                HsSemanales = Convert.ToInt32(inputHorasSemanales.Text),
-                HsTotales = Convert.ToInt32(inputHorasTotales.Text)
+                MessageBox.Show("Ingrese correctamente las horas");
+            }
 
-            };
 
-            await _httpClient.PutAsJsonAsync($"materias/{this.id}", m); ;
-
-            this.Dispose();
         }
 
         private async void UpdateMateria_Load(object sender, EventArgs e)

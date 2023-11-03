@@ -39,13 +39,15 @@ namespace Escritorio.InscripcionesAlumnosForm
 
         }
 
+
+
         private async void button1_Click(object sender, EventArgs e)
         {
             try
             {
                 int idPersona = Convert.ToInt32(comboAlumno.SelectedValue);
                 int idCurso = Convert.ToInt32(comboCurso.SelectedValue);
-               
+
                 var inscripcion = await _httpClient.GetFromJsonAsync<InscripcionAlumno>($"inscripcionesalumnoscurso/{idCurso}/{idPersona}");
 
                 InscripcionAlumno insc = new InscripcionAlumno()
@@ -63,13 +65,11 @@ namespace Escritorio.InscripcionesAlumnosForm
                 }
 
                 this.Dispose();
-            } catch(Exception ex) 
-            {
-                MessageBox.Show("Ha ocurrido un error");
             }
-            
-
-            
+            catch (Exception ex)
+            {
+                MessageBox.Show("Ingrese la nota correctamente");
+            }
 
         }
 
@@ -100,7 +100,7 @@ namespace Escritorio.InscripcionesAlumnosForm
                 comboCurso.DisplayMember = "DescripcionCurso";
                 comboCurso.ValueMember = "IdCurso";
             }
-            
+
 
         }
     }

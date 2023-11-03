@@ -90,6 +90,7 @@
             // 
             // comboPlan
             // 
+            comboPlan.DropDownStyle = ComboBoxStyle.DropDownList;
             comboPlan.FormattingEnabled = true;
             comboPlan.Location = new Point(66, 112);
             comboPlan.Name = "comboPlan";

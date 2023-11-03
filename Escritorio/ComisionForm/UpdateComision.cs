@@ -29,21 +29,30 @@ namespace Escritorio.ComisionForm
 
         private async void button1_Click(object sender, EventArgs e)
         {
-            Plan p = new Plan()
+
+            try
             {
-                Id = Convert.ToInt32(comboPlan.SelectedValue)
-            };
+                Plan p = new Plan()
+                {
+                    Id = Convert.ToInt32(comboPlan.SelectedValue)
+                };
 
-            Comision c = new Comision()
+                Comision c = new Comision()
+                {
+                    Descripcion = inputDesc.Text,
+                    Anio = Convert.ToInt32(inputAnio.Text),
+                    Plan = p
+                };
+
+                await _httpClient.PutAsJsonAsync($"comisiones/{this.id}", c);
+
+                this.Dispose();
+            } catch (Exception ex)
             {
-                Descripcion = inputDesc.Text,
-                Anio = Convert.ToInt32(inputAnio.Text),
-                Plan = p
-            };
+                MessageBox.Show("Ingrese el año correctamente");
 
-            await _httpClient.PutAsJsonAsync($"comisiones/{this.id}", c);
-
-            this.Dispose();
+            }
+            
         }
 
         private async void UpdateComision_Load(object sender, EventArgs e)

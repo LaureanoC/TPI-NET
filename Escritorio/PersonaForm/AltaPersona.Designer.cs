@@ -175,6 +175,7 @@
             // 
             // inputComboPlan
             // 
+            inputComboPlan.DropDownStyle = ComboBoxStyle.DropDownList;
             inputComboPlan.FormattingEnabled = true;
             inputComboPlan.Location = new Point(36, 234);
             inputComboPlan.Name = "inputComboPlan";

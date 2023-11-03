@@ -57,7 +57,7 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(67, 122);
+            label1.Location = new Point(68, 122);
             label1.Name = "label1";
             label1.Size = new Size(38, 15);
             label1.TabIndex = 11;
@@ -65,15 +65,16 @@
             // 
             // comboCurso
             // 
+            comboCurso.DropDownStyle = ComboBoxStyle.DropDownList;
             comboCurso.FormattingEnabled = true;
-            comboCurso.Location = new Point(111, 119);
+            comboCurso.Location = new Point(112, 119);
             comboCurso.Name = "comboCurso";
             comboCurso.Size = new Size(225, 23);
             comboCurso.TabIndex = 10;
             // 
             // button1
             // 
-            button1.Location = new Point(178, 166);
+            button1.Location = new Point(163, 175);
             button1.Name = "button1";
             button1.Size = new Size(75, 23);
             button1.TabIndex = 8;
@@ -94,7 +95,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(436, 212);
+            ClientSize = new Size(436, 269);
             Controls.Add(legajo);
             Controls.Add(label3);
             Controls.Add(label2);

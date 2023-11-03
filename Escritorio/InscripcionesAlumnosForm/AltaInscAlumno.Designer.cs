@@ -48,6 +48,7 @@
             // 
             // comboAlumno
             // 
+            comboAlumno.DropDownStyle = ComboBoxStyle.DropDownList;
             comboAlumno.FormattingEnabled = true;
             comboAlumno.Location = new Point(111, 125);
             comboAlumno.Name = "comboAlumno";
@@ -56,6 +57,7 @@
             // 
             // comboCurso
             // 
+            comboCurso.DropDownStyle = ComboBoxStyle.DropDownList;
             comboCurso.FormattingEnabled = true;
             comboCurso.Location = new Point(111, 83);
             comboCurso.Name = "comboCurso";

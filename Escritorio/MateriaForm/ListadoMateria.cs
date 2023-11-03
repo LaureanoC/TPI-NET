@@ -45,30 +45,54 @@ namespace Escritorio.MateriaForm
 
         private async void btnEliminar_Click(object sender, EventArgs e)
         {
-            int id = Convert.ToInt32(this.dataGridView1.SelectedRows[0].Cells[0].Value);
+            try
+            {
+                int id = Convert.ToInt32(this.dataGridView1.SelectedRows[0].Cells[0].Value);
 
-            var especialidad = await _httpClient.DeleteAsync($"materias/{id}");
+                var especialidad = await _httpClient.DeleteAsync($"materias/{id}");
 
-            await listar();
+                await listar();
+
+            } catch(Exception ex)
+            {
+                MessageBox.Show("Debe seleccionar una fila");
+            }
         }
 
         private async void btnModificar_Click(object sender, EventArgs e)
         {
-            int id = Convert.ToInt32(this.dataGridView1.SelectedRows[0].Cells[0].Value);
-            UpdateMateria form = new UpdateMateria(id);
-            form.Owner = this;
-            form.ShowDialog();
+           try
+            {
+                int id = Convert.ToInt32(this.dataGridView1.SelectedRows[0].Cells[0].Value);
+                UpdateMateria form = new UpdateMateria(id);
+                form.Owner = this;
+                form.ShowDialog();
 
 
-            await listar();
+                await listar();
+
+            } catch( Exception ex )
+            {
+                MessageBox.Show("Debe seleccionar una fila");
+            }
         }
 
         private async void btnGet_Click(object sender, EventArgs e)
         {
-            int id = Convert.ToInt32(this.dataGridView1.SelectedRows[0].Cells[0].Value);
             
-            var materia = await _httpClient.GetFromJsonAsync<MateriaDto>($"materias/{id}");
+          try
+            {
 
+                int id = Convert.ToInt32(this.dataGridView1.SelectedRows[0].Cells[0].Value);
+
+                var materia = await _httpClient.GetFromJsonAsync<MateriaDto>($"materias/{id}");
+
+
+            }
+            catch ( Exception ex )
+            {
+                MessageBox.Show("Debe seleccionar una fila");
+            }
             
 
             

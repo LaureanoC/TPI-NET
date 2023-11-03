@@ -41,7 +41,7 @@ namespace Escritorio.CursoForm
 
             var materia = await _httpClient.GetFromJsonAsync<Materia>($"materias/{curso.Materia.Id}");
 
-            comboMateria.SelectedValue= materia.Id;
+            comboMateria.SelectedValue = materia.Id;
 
 
 
@@ -64,17 +64,27 @@ namespace Escritorio.CursoForm
         private async void btnAdd_Click(object sender, EventArgs e)
         {
 
-            Curso c = new Curso()
+            try
             {
-                Anio = Convert.ToInt32(inputAnio.Text),
-                Cupo = Convert.ToInt32(inputCupo.Text),
-                Materia = new Materia() { Id = Convert.ToInt32(comboMateria.SelectedValue) },
-                Comision = new Comision() { Id = Convert.ToInt32(comboComision.SelectedValue) }
-            };
+                Curso c = new Curso()
+                {
+                    Anio = Convert.ToInt32(inputAnio.Text),
+                    Cupo = Convert.ToInt32(inputCupo.Text),
+                    Materia = new Materia() { Id = Convert.ToInt32(comboMateria.SelectedValue) },
+                    Comision = new Comision() { Id = Convert.ToInt32(comboComision.SelectedValue) }
+                };
 
-            await _httpClient.PutAsJsonAsync($"cursos/{id}", c);
+                await _httpClient.PutAsJsonAsync($"cursos/{id}", c);
 
-            this.Dispose();
+                this.Dispose();
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Ingrese correctamente el año y cupo.");
+            }
+
+
         }
     }
 }

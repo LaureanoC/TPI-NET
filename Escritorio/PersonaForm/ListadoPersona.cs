@@ -47,22 +47,36 @@ namespace Escritorio.PersonaForm
 
         private async void modBtn_Click(object sender, EventArgs e)
         {
-            int id = Convert.ToInt32(this.dataPersona.SelectedRows[0].Cells[0].Value);
+            try
+            {
+                int id = Convert.ToInt32(this.dataPersona.SelectedRows[0].Cells[0].Value);
 
-            UpdatePersona formMod = new UpdatePersona(id);
-            formMod.Owner = this;
-            formMod.ShowDialog();
+                UpdatePersona formMod = new UpdatePersona(id);
+                formMod.Owner = this;
+                formMod.ShowDialog();
 
-            await listar();
+                await listar();
+
+            } catch (Exception ex)
+            {
+                MessageBox.Show("Debe seleccionar una fila");
+            }
         }
 
         private async void elimBtn_Click(object sender, EventArgs e)
         {
-            int id = Convert.ToInt32(this.dataPersona.SelectedRows[0].Cells[0].Value);
+            try
+            {
+                int id = Convert.ToInt32(this.dataPersona.SelectedRows[0].Cells[0].Value);
 
-            var especialidad = await _httpClient.DeleteAsync($"personas/{id}");
+                var especialidad = await _httpClient.DeleteAsync($"personas/{id}");
 
-            await listar();
-        }
+                await listar();
+            
+            } catch (Exception ex)
+            {
+                MessageBox.Show("Debe seleccionar una fila");
+            }
+            }
     }
 }

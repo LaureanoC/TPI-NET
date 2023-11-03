@@ -48,32 +48,52 @@ namespace Escritorio.PlanForm
 
         private async void elimButton_Click(object sender, EventArgs e)
         {
-            int id = Convert.ToInt32(this.dataPlan.SelectedRows[0].Cells[0].Value);
+           try
+            {
+                int id = Convert.ToInt32(this.dataPlan.SelectedRows[0].Cells[0].Value);
 
-            var planes = await _httpClient.DeleteAsync($"planes/{id}");
+                var planes = await _httpClient.DeleteAsync($"planes/{id}");
 
-            await listar();
+                await listar();
+            
+            } catch (Exception ex)
+            {
+                MessageBox.Show("Debe seleccionar uan fila");
+            }
         }
 
         private async void modButton_Click(object sender, EventArgs e)
         {
-            int id = Convert.ToInt32(this.dataPlan.SelectedRows[0].Cells[0].Value);
+            try
+            {
+                int id = Convert.ToInt32(this.dataPlan.SelectedRows[0].Cells[0].Value);
 
-            UpdatePlan formMod = new UpdatePlan(id);
-            formMod.Owner = this;
-            formMod.ShowDialog();
+                UpdatePlan formMod = new UpdatePlan(id);
+                formMod.Owner = this;
+                formMod.ShowDialog();
 
-            await listar();
+                await listar();
+
+            } catch(Exception ex)
+            {
+                MessageBox.Show("Debe seleccionar una fila");
+            }
         }
 
         private void btnGet_Click(object sender, EventArgs e)
         {
            
-            var descripcion = this.dataPlan.SelectedRows[0].Cells[1].Value;
+           try
+            {
+                var descripcion = this.dataPlan.SelectedRows[0].Cells[1].Value;
 
-            var descripcionEspecialidad = this.dataPlan.SelectedRows[0].Cells[2].Value;
+                var descripcionEspecialidad = this.dataPlan.SelectedRows[0].Cells[2].Value;
 
-            MessageBox.Show("Plan: " + descripcion + " Especialidad: " + descripcionEspecialidad);
+                MessageBox.Show("Plan: " + descripcion + " Especialidad: " + descripcionEspecialidad);
+            } catch (Exception ex)
+            {
+                MessageBox.Show("Debe seleccionar una fila");
+            }
         }
     }
 }

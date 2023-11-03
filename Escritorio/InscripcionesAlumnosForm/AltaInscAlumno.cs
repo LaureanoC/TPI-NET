@@ -83,19 +83,13 @@ namespace Escritorio.InscripcionesAlumnosForm
                 if (cantidad < cupo)
                 {
                     await _httpClient.PostAsJsonAsync("inscripcionesalumnos", ia);
+                    this.Dispose();
                 }
                 else
                 {
                     MessageBox.Show("No hay cupo disponible");
                 }
             }
-
-
-
-
-
-            this.Dispose();
-
 
         }
     }

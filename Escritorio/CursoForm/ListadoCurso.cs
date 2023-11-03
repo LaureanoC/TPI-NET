@@ -44,12 +44,21 @@ namespace Escritorio.CursoForm
 
         private void button2_Click(object sender, EventArgs e)
         {
-            int id = Convert.ToInt32(dataGridView1.SelectedRows[0].Cells[0].Value);
-            UpdateCurso form = new UpdateCurso(id);
-            form.Owner = this;
-            form.ShowDialog();
+            try
+            {
+                int id = Convert.ToInt32(dataGridView1.SelectedRows[0].Cells[0].Value);
+                UpdateCurso form = new UpdateCurso(id);
+                form.Owner = this;
+                form.ShowDialog();
 
-            listar();
+                listar();
+            }
+            catch (ArgumentOutOfRangeException ex)
+            {
+                MessageBox.Show("Debe seleccionar una fila");
+            }
+            
+            
         }
 
         private void ListadoCurso_Load(object sender, EventArgs e)
@@ -59,11 +68,22 @@ namespace Escritorio.CursoForm
 
         private async void btnEliminar_Click(object sender, EventArgs e)
         {
-            int id = Convert.ToInt32(dataGridView1.SelectedRows[0].Cells[0].Value);
+            
+            try
+            {
 
-            await _httpClient.DeleteAsync($"cursos/{id}");
+                int id = Convert.ToInt32(dataGridView1.SelectedRows[0].Cells[0].Value);
 
-            listar();
+                await _httpClient.DeleteAsync($"cursos/{id}");
+
+                listar();
+
+            }
+            catch(ArgumentOutOfRangeException ex)
+            {
+                MessageBox.Show("Debe seleccionar una fila");
+            }
+            
         }
     }
 }

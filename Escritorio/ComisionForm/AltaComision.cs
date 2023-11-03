@@ -30,20 +30,28 @@ namespace Escritorio.ComisionForm
 
         private async void button1_Click(object sender, EventArgs e)
         {
-            Plan p = new Plan();
-
-            p.Id = Convert.ToInt32(comboPlan.SelectedValue); ;
-
-            var c = new Comision()
+            try
             {
-                Descripcion = inputDesc.Text,
-                Anio = Convert.ToInt32(inputAnio.Text),
-                Plan = p
-            };
+                Plan p = new Plan();
 
-            await _httpClient.PostAsJsonAsync("comisiones", c);
+                p.Id = Convert.ToInt32(comboPlan.SelectedValue); ;
 
-            this.Dispose();
+                var c = new Comision()
+                {
+                    Descripcion = inputDesc.Text,
+                    Anio = Convert.ToInt32(inputAnio.Text),
+                    Plan = p
+                };
+
+                await _httpClient.PostAsJsonAsync("comisiones", c);
+
+                this.Dispose();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Ingrese el año correctamente");
+            }
+
         }
 
         private async void AltaComision_Load(object sender, EventArgs e)
@@ -55,6 +63,6 @@ namespace Escritorio.ComisionForm
             comboPlan.ValueMember = "Id";
         }
 
-       
+
     }
 }

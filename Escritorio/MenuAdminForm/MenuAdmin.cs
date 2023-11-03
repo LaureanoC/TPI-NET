@@ -2,6 +2,7 @@
 using Escritorio.CursoForm;
 using Escritorio.Especialidad;
 using Escritorio.InscripcionesAlumnosForm;
+using Escritorio.InscripcionesProfesoresForm;
 using Escritorio.MateriaForm;
 using Escritorio.PersonaForm;
 using Escritorio.PlanForm;
@@ -72,6 +73,13 @@ namespace Escritorio.MenuAdminForm
             form.Owner = this;
             form.ShowDialog();
 
+        }
+
+        private void btnInscProf_Click(object sender, EventArgs e)
+        {
+            ListadoInscProfesor form = new ListadoInscProfesor();
+            form.Owner = this;
+            form.ShowDialog();
         }
     }
 }

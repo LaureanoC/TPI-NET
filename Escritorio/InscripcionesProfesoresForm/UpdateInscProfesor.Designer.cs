@@ -1,6 +1,6 @@
-﻿namespace Escritorio.InscripcionesAlumnosForm
+﻿namespace Escritorio.InscripcionesProfesoresForm
 {
-    partial class UpdateInscAlumno
+    partial class UpdateInscProfesor
     {
         /// <summary>
         /// Required designer variable.
@@ -28,56 +28,46 @@
         /// </summary>
         private void InitializeComponent()
         {
-            label3 = new Label();
-            label2 = new Label();
             label1 = new Label();
-            comboCurso = new ComboBox();
+            inputCurso = new ComboBox();
+            inputCargo = new TextBox();
             button1 = new Button();
             legajo = new Label();
+            label2 = new Label();
             SuspendLayout();
-            // 
-            // label3
-            // 
-            label3.AutoSize = true;
-            label3.Location = new Point(163, 46);
-            label3.Name = "label3";
-            label3.Size = new Size(119, 15);
-            label3.TabIndex = 13;
-            label3.Text = "Modificar Inscripción";
-            // 
-            // label2
-            // 
-            label2.AutoSize = true;
-            label2.Location = new Point(67, 80);
-            label2.Name = "label2";
-            label2.Size = new Size(91, 15);
-            label2.TabIndex = 12;
-            label2.Text = "Legajo Alumno:";
             // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(68, 122);
+            label1.Location = new Point(81, 46);
             label1.Name = "label1";
-            label1.Size = new Size(38, 15);
-            label1.TabIndex = 11;
-            label1.Text = "Curso";
+            label1.Size = new Size(223, 15);
+            label1.TabIndex = 9;
+            label1.Text = "Modificar Inscripción de profesor a curso";
             // 
-            // comboCurso
+            // inputCurso
             // 
-            comboCurso.DropDownStyle = ComboBoxStyle.DropDownList;
-            comboCurso.FormattingEnabled = true;
-            comboCurso.Location = new Point(112, 119);
-            comboCurso.Name = "comboCurso";
-            comboCurso.Size = new Size(225, 23);
-            comboCurso.TabIndex = 10;
+            inputCurso.DropDownStyle = ComboBoxStyle.DropDownList;
+            inputCurso.FormattingEnabled = true;
+            inputCurso.Location = new Point(105, 125);
+            inputCurso.Name = "inputCurso";
+            inputCurso.Size = new Size(169, 23);
+            inputCurso.TabIndex = 8;
+            // 
+            // inputCargo
+            // 
+            inputCargo.Location = new Point(105, 154);
+            inputCargo.Name = "inputCargo";
+            inputCargo.PlaceholderText = "Cargo";
+            inputCargo.Size = new Size(169, 23);
+            inputCargo.TabIndex = 6;
             // 
             // button1
             // 
-            button1.Location = new Point(163, 161);
+            button1.Location = new Point(148, 199);
             button1.Name = "button1";
             button1.Size = new Size(75, 23);
-            button1.TabIndex = 8;
+            button1.TabIndex = 5;
             button1.Text = "Modificar";
             button1.UseVisualStyleBackColor = true;
             button1.Click += button1_Click;
@@ -85,37 +75,46 @@
             // legajo
             // 
             legajo.AutoSize = true;
-            legajo.Location = new Point(161, 80);
+            legajo.Location = new Point(199, 89);
             legajo.Name = "legajo";
             legajo.Size = new Size(42, 15);
-            legajo.TabIndex = 14;
+            legajo.TabIndex = 16;
             legajo.Text = "Legajo";
             // 
-            // UpdateInscAlumno
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Location = new Point(105, 89);
+            label2.Name = "label2";
+            label2.Size = new Size(92, 15);
+            label2.TabIndex = 15;
+            label2.Text = "Legajo Profesor:";
+            // 
+            // UpdateInscProfesor
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(436, 269);
+            ClientSize = new Size(378, 270);
             Controls.Add(legajo);
-            Controls.Add(label3);
             Controls.Add(label2);
             Controls.Add(label1);
-            Controls.Add(comboCurso);
+            Controls.Add(inputCurso);
+            Controls.Add(inputCargo);
             Controls.Add(button1);
-            Name = "UpdateInscAlumno";
+            Name = "UpdateInscProfesor";
             Text = "Academia";
-            Load += UpdateInscAlumno_Load;
+            Load += UpdateInscProfesor_Load;
             ResumeLayout(false);
             PerformLayout();
         }
 
         #endregion
 
-        private Label label3;
-        private Label label2;
         private Label label1;
-        private ComboBox comboCurso;
+        private ComboBox inputCurso;
+        private TextBox inputCargo;
         private Button button1;
         private Label legajo;
+        private Label label2;
     }
 }

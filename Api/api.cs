@@ -50,6 +50,17 @@ app.MapGet("/alumnos", async (UniversidadContext context) =>
 
 });
 
+app.MapGet("/profesores", async (UniversidadContext context) =>
+{
+    var pro = await context.Personas.ToListAsync();
+
+    var filtro = from profesor in pro where profesor.TipoPersona.Equals("Profesor") select profesor;
+
+    return Results.Ok(filtro);
+
+
+});
+
 
 
 
@@ -648,6 +659,105 @@ app.MapDelete("/inscripcionesalumnos/{id}", async (int id, UniversidadContext co
     }
 });
 
+
+// InscripcionProfesor
+
+app.MapPost("inscripcionesprofesor", async(UniversidadContext context, InscripcionProfesor ip) =>
+{
+    context.Attach(ip.Profesor);
+    context.Attach(ip.Curso);
+    context.InscripcionesProfesores.Add(ip);
+    await context.SaveChangesAsync();
+
+    return Results.Ok();
+});
+
+app.MapGet("inscripcionesprofesor" , async(UniversidadContext context) =>
+{
+
+    var insc = await context.InscripcionesProfesores
+        .Select(c => new InscripcionProfesorDto()
+        {
+            Id = c.Id,
+            IdProfesor = c.Profesor.Id,
+            IdCurso = c.Curso.Id,
+            DescripcionCurso = c.Curso.Materia.Descripcion + "-" + c.Curso.Comision.Descripcion + "-" + c.Curso.Anio,
+            AñoCurso = c.Curso.Anio,
+            Legajo = c.Profesor.Legajo,
+            Cargo = c.Cargo
+        })
+        .ToListAsync();
+
+    return Results.Ok(insc);
+
+});
+
+app.MapGet("inscripcionesprofesor/{idInscripcion}", async(UniversidadContext context, int idInscripcion)=>
+{
+    var insc = await context.InscripcionesProfesores
+        .Where(c => c.Id == idInscripcion)
+        .Select(c => new InscripcionProfesorDto()
+        {
+            Id = c.Id,
+            IdProfesor = c.Profesor.Id,
+            IdCurso = c.Curso.Id,
+            DescripcionCurso = c.Curso.Materia.Descripcion + "-" + c.Curso.Comision.Descripcion + "-" + c.Curso.Anio,
+            AñoCurso = c.Curso.Anio,
+            Legajo = c.Profesor.Legajo,
+            Cargo = c.Cargo
+        })
+        .FirstOrDefaultAsync();
+
+    return Results.Ok(insc);
+
+});
+
+app.MapPut("/inscripcionesprofesor/{idInscripcion}", async (InscripcionProfesor ip, int idInscripcion, UniversidadContext context) =>
+{
+    var inscripcion = await context.InscripcionesProfesores.FindAsync(idInscripcion);
+
+    if (inscripcion is null) return Results.NotFound();
+
+    context.Attach(ip.Profesor);
+    context.Attach(ip.Curso);
+    inscripcion.Curso = ip.Curso;
+    inscripcion.Profesor = ip.Profesor;
+    inscripcion.Cargo = ip.Cargo;
+
+    await context.SaveChangesAsync();
+
+    return Results.Ok(inscripcion);
+});
+
+app.MapDelete("/inscripcionesprofesor/{idInscripcion}", async (int idInscripcion, UniversidadContext context) =>
+{
+    if (await context.InscripcionesProfesores.FindAsync(idInscripcion) is InscripcionProfesor ip)
+    {
+        context.InscripcionesProfesores.Remove(ip);
+        await context.SaveChangesAsync();
+        return Results.Ok(ip);
+    }
+    else
+    {
+        return Results.NotFound();
+    }
+});
+
+app.MapGet("/inscripcionesprofesorestainscripto/{idCurso}/{idPersona}", async(UniversidadContext context, int idCurso, int idPersona) =>
+{
+    var ins = context.InscripcionesProfesores;
+
+    var filtro = from i in ins where i.Curso.Id == idCurso & i.Profesor.Id == idPersona select i;
+
+    var inscripto = false;
+
+    if (filtro.Count() > 0)
+    {
+        inscripto = true;
+    }
+
+    return Results.Ok(inscripto);
+});
 
 
 

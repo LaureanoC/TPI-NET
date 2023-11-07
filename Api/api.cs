@@ -108,9 +108,17 @@ app.MapDelete("/personas/{id}", async (int id, UniversidadContext context) =>
 {
     if (await context.Personas.FindAsync(id) is Persona p)
     {
-        context.Remove(p);
-        await context.SaveChangesAsync();
-        return Results.Ok(p);
+        context.Personas.Remove(p);
+        try
+        {
+            await context.SaveChangesAsync();
+            return Results.Ok(p);
+
+        } catch(Exception ex)
+        {
+            return Results.BadRequest("No se puede eliminar porque tiene otra entidad asociada.");
+        }
+        
     }
     else
     {
@@ -161,9 +169,16 @@ app.MapDelete("/especialidades/{id}", async (int id, UniversidadContext context)
 {
     if (await context.Especialidades.FindAsync(id) is Especialidad e)
     {
-        context.Remove(e);
-        await context.SaveChangesAsync();
-        return Results.Ok(e);
+        try
+        {
+            context.Remove(e);
+            await context.SaveChangesAsync();
+            return Results.Ok(e);
+        } catch (Exception ex)
+        {
+            return Results.BadRequest("No se puede eliminar porque tiene otra entidad asociada.");
+        }
+        
     }
     else
     {
@@ -238,9 +253,17 @@ app.MapDelete("/planes/{id}", async (int id, UniversidadContext context) =>
 {
     if (await context.Planes.FindAsync(id) is Plan p)
     {
-        context.Remove(p);
-        await context.SaveChangesAsync();
-        return Results.Ok(p);
+        try
+        {
+            context.Remove(p);
+            await context.SaveChangesAsync();
+            return Results.Ok(p);
+
+        } catch (Exception ex)
+        {
+            return Results.BadRequest("No se puede eliminar porque tiene otra entidad asociada.");
+        }
+        
     }
     else
     {
@@ -318,9 +341,17 @@ app.MapDelete("/materias/{id}", async (int id, UniversidadContext context) =>
 {
     if (await context.Materias.FindAsync(id) is Materia m)
     {
-        context.Remove(m);
-        await context.SaveChangesAsync();
-        return Results.Ok(m);
+        try
+        {
+            context.Remove(m);
+            await context.SaveChangesAsync();
+            return Results.Ok(m);
+
+        } catch (Exception ex)
+        {
+            return Results.BadRequest("No se puede eliminar porque tiene otra entidad asociada.");
+        }
+        
     }
     else
     {
@@ -393,9 +424,17 @@ app.MapDelete("/comisiones/{id}", async (int id, UniversidadContext context) =>
 {
     if (await context.Comisiones.FindAsync(id) is Comision c)
     {
-        context.Comisiones.Remove(c);
-        await context.SaveChangesAsync();
-        return Results.Ok(c);
+        try
+        {
+            context.Comisiones.Remove(c);
+            await context.SaveChangesAsync();
+            return Results.Ok(c);
+
+        } catch (Exception ex)
+        {
+            return Results.BadRequest("No se puede eliminar porque tiene otra entidad asociada.");
+        }
+        
     }
     else
     {
@@ -501,9 +540,17 @@ app.MapDelete("/cursos/{id}", async (int id, UniversidadContext context) =>
 {
     if (await context.Cursos.FindAsync(id) is Curso c)
     {
-        context.Cursos.Remove(c);
-        await context.SaveChangesAsync();
-        return Results.Ok(c);
+        try
+        {
+            context.Cursos.Remove(c);
+            await context.SaveChangesAsync();
+            return Results.Ok(c);
+
+        } catch (Exception ex)
+        {
+            return Results.BadRequest("No se puede eliminar porque tiene otra entidad asociada.");
+        }
+        
     }
     else
     {

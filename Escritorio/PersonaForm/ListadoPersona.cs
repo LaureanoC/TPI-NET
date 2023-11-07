@@ -69,7 +69,12 @@ namespace Escritorio.PersonaForm
             {
                 int id = Convert.ToInt32(this.dataPersona.SelectedRows[0].Cells[0].Value);
 
-                var especialidad = await _httpClient.DeleteAsync($"personas/{id}");
+                var persona = await _httpClient.DeleteAsync($"personas/{id}");
+
+                if(!persona.IsSuccessStatusCode) //si no es 200
+                {
+                    MessageBox.Show(await persona.Content.ReadAsStringAsync());
+                }
 
                 await listar();
             

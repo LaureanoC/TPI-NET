@@ -74,8 +74,12 @@ namespace Escritorio.CursoForm
 
                 int id = Convert.ToInt32(dataGridView1.SelectedRows[0].Cells[0].Value);
 
-                await _httpClient.DeleteAsync($"cursos/{id}");
+                var response = await _httpClient.DeleteAsync($"cursos/{id}");
 
+                if (!response.IsSuccessStatusCode) //si no es 200
+                {
+                    MessageBox.Show(await response.Content.ReadAsStringAsync());
+                }
                 listar();
 
             }

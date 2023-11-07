@@ -1,4 +1,5 @@
 ﻿using Dtos;
+using Entities;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -70,7 +71,12 @@ namespace Escritorio.ComisionForm
             {
                 int id = Convert.ToInt32(this.dataGridView1.SelectedRows[0].Cells[0].Value);
 
-                var especialidad = await _httpClient.DeleteAsync($"comisiones/{id}");
+                var comision = await _httpClient.DeleteAsync($"comisiones/{id}");
+
+                if (!comision.IsSuccessStatusCode) //si no es 200
+                {
+                    MessageBox.Show(await comision.Content.ReadAsStringAsync());
+                }
 
                 await listar();
             } 

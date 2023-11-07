@@ -52,7 +52,12 @@ namespace Escritorio.Especialidad
             {
                 int id = Convert.ToInt32(this.dataEspecialidad.SelectedRows[0].Cells[0].Value);
 
-                var especialidad = await _httpClient.DeleteAsync($"especialidades/{id}");
+                var response = await _httpClient.DeleteAsync($"especialidades/{id}");
+
+                if (!response.IsSuccessStatusCode) //si no es 200
+                {
+                    MessageBox.Show(await response.Content.ReadAsStringAsync());
+                }
 
                 await listar();
 

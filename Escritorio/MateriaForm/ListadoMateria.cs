@@ -1,4 +1,5 @@
 ﻿using Dtos;
+using Entities;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -49,7 +50,12 @@ namespace Escritorio.MateriaForm
             {
                 int id = Convert.ToInt32(this.dataGridView1.SelectedRows[0].Cells[0].Value);
 
-                var especialidad = await _httpClient.DeleteAsync($"materias/{id}");
+                var response = await _httpClient.DeleteAsync($"materias/{id}");
+
+                if (!response.IsSuccessStatusCode) //si no es 200
+                {
+                    MessageBox.Show(await response.Content.ReadAsStringAsync());
+                }
 
                 await listar();
 

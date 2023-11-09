@@ -1,0 +1,53 @@
+﻿@page "/listadopersona"
+@using Entities
+
+
+
+<h3>ListadoPersona</h3>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Nombre</th>
+            <th>Apellido</th>
+            <th>Email</th>
+            <th>Tipo Persona</th>
+            <th>Dirección</th>
+            <th>Legajo</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var persona in personas)
+        {
+            <tr>
+                <td>@persona.Nombre</td>
+                <td>@persona.Apellido</td>
+                <td>@persona.Email</td>
+                <td>@persona.TipoPersona</td>
+                <td>@persona.Direccion</td>
+                <td>@persona.Legajo</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+@code {
+
+    List<Persona> personas = new List<Persona>();
+
+    private readonly HttpClient http = new()
+        {
+            BaseAddress = new Uri("http://localhost:5297")
+        };
+
+    protected override async Task OnInitializedAsync()
+    {
+
+        personas = await http.GetFromJsonAsync<List<Persona>>("personas");
+
+
+
+    }
+
+}

@@ -1,0 +1,70 @@
+﻿@page "/altapersona"
+@using Entities
+
+
+<h3>AltaPersona</h3>
+
+<form  @onsubmit="Enviar">
+    <input placeholder="Nombre" @bind="nombre" />
+    <input placeholder="Apellido" @bind="apellido"/>
+    <input placeholder="Email" @bind="email"/>
+    <input placeholder="Dirección" @bind="direccion"/>
+    <input placeholder="Telefono" @bind="telefono"/>
+    <input placeholder="Legajo"  @bind="legajo"/>
+    <input type="date" @bind="fecha"/>
+    <select @bind="tipo">
+        <option>Alumno</option>
+        <option>Profesor</option>
+    </select>
+    <button type="submit">Agregar</button>
+</form>
+
+@code {
+    @inject NavigationManager NavigationManager
+    [Inject]
+    private IJSRuntime JSRuntime { get; set; }
+
+    private string nombre;
+    private string apellido;
+    private string email;
+    private string direccion;
+    private string telefono;
+    private string legajo;
+    private string tipo;
+    private DateTime fecha;
+
+    private readonly HttpClient http = new()
+        {
+            BaseAddress = new Uri("http://localhost:5297")
+        };
+
+    private async void Enviar()
+    {
+        var p = new
+            {
+                
+                Nombre = "a",
+                Apellido = "b",
+                Email = "c",
+                Direccion = "d",
+                Telefono = "e",
+                Legajo = "f",
+                TipoPersona = "g",
+                FechaNacimiento = fecha,
+                
+            };
+
+        var response = await http.PostAsJsonAsync("personas", p);
+
+        if (response.IsSuccessStatusCode)
+        {
+            NavigationManager.NavigateTo("/listadopersona");
+        }
+        else
+        {
+            JSRuntime.InvokeVoidAsync("console.log", response.Content.ReadAsStringAsync());
+            JSRuntime.InvokeVoidAsync("console.log", p);
+        }
+
+    }
+}

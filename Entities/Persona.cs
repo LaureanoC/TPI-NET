@@ -20,9 +20,9 @@
 
         public string Legajo { get; set; }
 
-        public Plan Plan { get; set; }
+        public Plan ?Plan { get; set; }
 
-        public ICollection<Curso> Cursos { get; set; }
+        public ICollection<Curso> ?Cursos { get; set; }
 
 
     }

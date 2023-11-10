@@ -45,10 +45,11 @@ namespace Escritorio.PersonaForm
                 FechaNacimiento = inputFechaNac.Value,
                 Plan = plan,
                 Legajo = inputLegajo.Text,
-                Email = inputEmail.Text
+                Email = inputEmail.Text,
+                TipoPersona = inputTipo.Text
             };
 
-            await _httpClient.PutAsJsonAsync($"personas/{idPlan}", persona);
+            await _httpClient.PutAsJsonAsync($"personas/{id}", persona);
 
             this.Dispose();
         }
@@ -57,7 +58,6 @@ namespace Escritorio.PersonaForm
         {
 
             var persona = await _httpClient.GetFromJsonAsync<Persona>($"personas/{id}");
-
 
 
             var planes = await _httpClient.GetFromJsonAsync<IEnumerable<Plan>>("planes");
@@ -76,6 +76,8 @@ namespace Escritorio.PersonaForm
             inputFechaNac.Value = persona.FechaNacimiento;
             inputTelefono.Text = persona.Telefono;
             inputLegajo.Text = persona.Legajo;
+
+            inputTipo.SelectedIndex = 0;
 
         }
     }

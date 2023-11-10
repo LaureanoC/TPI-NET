@@ -1,0 +1,53 @@
+﻿@page "/listadoespecialidad"
+@using Entities
+
+<h3>ListadoEspecialidad</h3>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Descripción</th>
+            <th></th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var esp in especialidades)
+        {
+            <tr>
+                <td>@esp.Descripcion</td>
+                <td><a class="text-primary" style="cursor:pointer" @onclick="@(() => Borrar(esp.Id))">Borrar</a></td>
+                <td><a class="text-primary" style="cursor:pointer" href="modificarespecialidad/@esp.Id">Modificar</a></td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<a href="/">Volver</a>
+<a class="mx-3" href="altaespecialidad">Alta de Especialidad</a>
+
+
+@code {
+    @inject NavigationManager NavigationManager
+
+    List<Especialidad> especialidades = new List<Especialidad>();
+
+    private readonly HttpClient http = new()
+        {
+            BaseAddress = new Uri("http://localhost:5297")
+        };
+
+    protected override async Task OnInitializedAsync()
+    {
+        especialidades = await http.GetFromJsonAsync<List<Especialidad>>("especialidades");
+    }
+
+    protected async void Borrar(int id)
+    {
+        await http.DeleteAsync($"especialidades/{id}");
+
+        NavigationManager.NavigateTo(NavigationManager.Uri, true);
+    }
+
+
+}

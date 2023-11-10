@@ -1,0 +1,51 @@
+﻿@page "/modificarespecialidad/{id}"
+@using Entities
+
+<h3>Modificar especialidad</h3>
+
+<form @onsubmit="Modificar">
+
+    <input placeholder="Descripción" @bind=descripcion/>
+    <button type="submit">Modificar</button>
+
+</form>
+
+@code {
+
+    [Parameter]
+    public string id { get; set; }
+
+    @inject NavigationManager NavigationManager
+
+    private string descripcion;
+
+    private readonly HttpClient http = new()
+        {
+            BaseAddress = new Uri("http://localhost:5297")
+        };
+
+    protected override async Task OnInitializedAsync()
+    {
+        var especialidad = await http.GetFromJsonAsync<Especialidad>($"especialidades/{id}");
+
+        descripcion = especialidad.Descripcion;
+    }
+
+    private async void Modificar()
+    {
+        var esp = new Especialidad()
+        {
+            Id = Convert.ToInt32(id),
+            Descripcion = descripcion
+        };
+
+        var response = await http.PutAsJsonAsync($"especialidades/{id}", esp);
+
+        if (response.IsSuccessStatusCode)
+        {
+            NavigationManager.NavigateTo("/listadoespecialidad");
+        }
+    }
+
+
+}

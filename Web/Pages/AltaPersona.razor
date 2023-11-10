@@ -12,17 +12,27 @@
     <input placeholder="Telefono" @bind="telefono"/>
     <input placeholder="Legajo"  @bind="legajo"/>
     <input type="date" @bind="fecha"/>
-    <select @bind="tipo">
-        <option>Alumno</option>
-        <option>Profesor</option>
+
+    <select @bind="tipop">
+        <option selected hidden>Seleccione un tipo de persona</option>
+        <option value="Alumno">Alumno</option>
+        <option value="Profesor">Profesor</option>
+    </select>
+
+    <select @bind="idplan">
+        <option selected hidden>Seleccione un plan</option>
+        @foreach (var p in planes)
+        {
+            <option value="@p.Id">@p.Descripcion</option>
+        }
     </select>
     <button type="submit">Agregar</button>
 </form>
 
 @code {
     @inject NavigationManager NavigationManager
-    [Inject]
-    private IJSRuntime JSRuntime { get; set; }
+    
+    private List<Plan> planes = new List<Plan>();
 
     private string nombre;
     private string apellido;
@@ -30,7 +40,8 @@
     private string direccion;
     private string telefono;
     private string legajo;
-    private string tipo;
+    private string tipop;
+    private int idplan;
     private DateTime fecha;
 
     private readonly HttpClient http = new()
@@ -38,33 +49,33 @@
             BaseAddress = new Uri("http://localhost:5297")
         };
 
+    protected override async Task OnInitializedAsync()
+    {
+        planes = await http.GetFromJsonAsync<List<Plan>>("planes");
+    }
+
     private async void Enviar()
     {
-        var p = new
+        var p = new Persona()
             {
                 
-                Nombre = "a",
-                Apellido = "b",
-                Email = "c",
-                Direccion = "d",
-                Telefono = "e",
-                Legajo = "f",
-                TipoPersona = "g",
+                Nombre = nombre,
+                TipoPersona = tipop,
+                Apellido = apellido,
+                Email = email,
+                Direccion = direccion,
+                Telefono = telefono,
+                Legajo = legajo,
                 FechaNacimiento = fecha,
+                Plan = new Plan()
+                {
+                    Id = idplan
+                }
                 
             };
 
         var response = await http.PostAsJsonAsync("personas", p);
-
-        if (response.IsSuccessStatusCode)
-        {
-            NavigationManager.NavigateTo("/listadopersona");
-        }
-        else
-        {
-            JSRuntime.InvokeVoidAsync("console.log", response.Content.ReadAsStringAsync());
-            JSRuntime.InvokeVoidAsync("console.log", p);
-        }
-
+        NavigationManager.NavigateTo("/listadopersona");
+ 
     }
 }

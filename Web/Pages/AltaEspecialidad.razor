@@ -1,0 +1,39 @@
+﻿@page "/altaespecialidad"
+@using Entities
+
+
+<h3>Alta de Especialidad</h3>
+
+<form @onsubmit="Enviar">
+    <input placeholder="Descripcion" @bind="descripcion" />
+    <button type="submit">Agregar</button>
+</form>
+
+@code {
+    @inject NavigationManager NavigationManager
+
+    private string descripcion;
+    
+
+    private readonly HttpClient http = new()
+        {
+            BaseAddress = new Uri("http://localhost:5297")
+        };
+
+    private async void Enviar()
+    {
+        var e = new Especialidad()
+        {
+            Descripcion = descripcion,
+        };
+
+        var response = await http.PostAsJsonAsync("especialidades", e);
+
+        if (response.IsSuccessStatusCode)
+        {
+            NavigationManager.NavigateTo("/listadoespecialidad");
+        }
+        
+
+    }
+}

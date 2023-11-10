@@ -42,9 +42,24 @@ app.MapPost("/personas", async (Persona persona, UniversidadContext context) => 
 
 app.MapGet("/personas", async (UniversidadContext context) =>
 {
-    var per = await context.Personas.ToListAsync();
+    var personas = await context.Personas
+    .Select(p => new PersonaDto()
+    {
+        Id = p.Id,
+        Nombre = p.Nombre,
+        Apellido = p.Apellido,
+        Email = p.Email,
+        Direccion = p.Direccion,
+        Legajo = p.Legajo,
+        Telefono = p.Telefono,
+        TipoPersona = p.TipoPersona,
+        FechaNacimiento = p.FechaNacimiento,
+        PlanDesc = p.Plan.Descripcion
 
-    return Results.Ok(per);
+    })
+    .ToListAsync();
+
+    return Results.Ok(personas);
 
 
 });
@@ -88,6 +103,7 @@ app.MapGet("/personas/{id}", async (int id, UniversidadContext context) =>
                Direccion = p.Direccion,
                Legajo = p.Legajo,
                Telefono = p.Telefono,
+               TipoPersona = p.TipoPersona,
                FechaNacimiento = p.FechaNacimiento,
            })
            .FirstOrDefaultAsync();
@@ -98,15 +114,17 @@ app.MapGet("/personas/{id}", async (int id, UniversidadContext context) =>
 app.MapPut("/personas/{id}", async (int id, Persona p, UniversidadContext context) =>
 {
     var persona = await context.Personas.FindAsync(id);
-
+   
     if (persona is null) return Results.NotFound();
 
+    context.Attach(p.Plan);
     persona.Nombre = p.Nombre;
     persona.Apellido = p.Apellido;
     persona.Direccion = p.Direccion;
     persona.Legajo = p.Legajo;
     persona.Email = p.Email;
     persona.Telefono = p.Telefono;
+    persona.TipoPersona = p.TipoPersona;
     persona.FechaNacimiento = p.FechaNacimiento;
     persona.Plan = p.Plan;
 

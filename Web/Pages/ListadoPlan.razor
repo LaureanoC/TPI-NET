@@ -1,0 +1,56 @@
+﻿@page "/listadoplan"
+@using Entities
+@using Dtos
+
+<h3>ListadoEspecialidad</h3>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Descripción</th>
+            <th>Especialidad</th>
+            <th></th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var p in planes)
+        {
+            <tr>
+                <td>@p.Descripcion</td>
+                <td>@p.DescripcionEspecialidad</td>
+                <td><a class="text-primary" style="cursor:pointer" @onclick="@(() => Borrar(p.Id))">Borrar</a></td>
+                <td><a class="text-primary" style="cursor:pointer" href="modificarplan/@p.Id">Modificar</a></td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<a href="/">Volver</a>
+<a class="mx-3" href="altaplan">Alta de Plan</a>
+
+
+@code {
+    @inject NavigationManager NavigationManager
+
+    List<PlanDto> planes = new List<PlanDto>();
+
+    private readonly HttpClient http = new()
+        {
+            BaseAddress = new Uri("http://localhost:5297")
+        };
+
+    protected override async Task OnInitializedAsync()
+    {
+        planes = await http.GetFromJsonAsync<List<PlanDto>>("planes");
+    }
+
+    protected async void Borrar(int id)
+    {
+        await http.DeleteAsync($"planes/{id}");
+
+        NavigationManager.NavigateTo(NavigationManager.Uri, true);
+    }
+
+
+}

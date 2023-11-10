@@ -206,6 +206,7 @@
             inputTipo.Name = "inputTipo";
             inputTipo.Size = new Size(100, 23);
             inputTipo.TabIndex = 17;
+           
             // 
             // AltaPersona
             // 

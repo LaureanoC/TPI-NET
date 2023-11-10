@@ -13,7 +13,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Escritorio", "Escritorio\Es
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dtos", "Dtos\Dtos.csproj", "{046F5AE8-25A2-454C-95D0-8591D72D1887}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Web", "Web\Web.csproj", "{5F08A53B-2A74-4285-B967-0212EC5AA652}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Web", "Web\Web.csproj", "{5F08A53B-2A74-4285-B967-0212EC5AA652}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

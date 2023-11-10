@@ -1,5 +1,6 @@
 ﻿@page "/listadopersona"
 @using Entities
+@using Dtos
 
 
 
@@ -11,9 +12,13 @@
             <th>Nombre</th>
             <th>Apellido</th>
             <th>Email</th>
+            <th>Fecha Nacimiento</th>
             <th>Tipo Persona</th>
             <th>Dirección</th>
             <th>Legajo</th>
+            <th>Plan</th>
+            <th></th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
@@ -23,18 +28,26 @@
                 <td>@persona.Nombre</td>
                 <td>@persona.Apellido</td>
                 <td>@persona.Email</td>
+                <td>@persona.FechaNacimiento</td>
                 <td>@persona.TipoPersona</td>
                 <td>@persona.Direccion</td>
                 <td>@persona.Legajo</td>
+                <td>@persona.PlanDesc</td>
+                <td><a class="text-primary" style="cursor:pointer" @onclick="@(() => Borrar(persona.Id))">Borrar</a></td>
+                <td><a class="text-primary" style="cursor:pointer" href="modificarpersona/@persona.Id">Modificar</a></td>
             </tr>
         }
     </tbody>
 </table>
 
+<a href="/">Volver</a>
+<a class="mx-3" href="altapersona">Alta de persona</a>
+
 
 @code {
+    @inject NavigationManager NavigationManager
 
-    List<Persona> personas = new List<Persona>();
+    List<PersonaDto> personas = new List<PersonaDto>();
 
     private readonly HttpClient http = new()
         {
@@ -44,10 +57,15 @@
     protected override async Task OnInitializedAsync()
     {
 
-        personas = await http.GetFromJsonAsync<List<Persona>>("personas");
+        personas = await http.GetFromJsonAsync<List<PersonaDto>>("personas");
 
+    }
 
+    protected async void Borrar(int id)
+    {
+        await http.DeleteAsync($"personas/{id}");
 
+        NavigationManager.NavigateTo(NavigationManager.Uri, true);
     }
 
 }

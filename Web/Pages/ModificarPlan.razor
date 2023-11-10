@@ -1,0 +1,73 @@
+﻿@page "/modificarplan/{id}"
+@using Entities
+
+<h3>Modificar plan</h3>
+
+<form @onsubmit="Modificar">
+
+    <input placeholder="Descripción" @bind=descripcion />
+
+    <select @bind="idEspecialidad">
+        @foreach (var e in especialidades)
+        {
+            @if(e.Id == idEspecialidad)
+            {
+                <option value="@e.Id" selected>@e.Descripcion</option>
+            } else
+            {
+                <option value="@e.Id">@e.Descripcion</option>
+            }
+
+        }
+    </select>
+
+
+    <button type="submit">Modificar</button>
+
+</form>
+
+@code {
+
+    [Parameter]
+    public string id { get; set; }
+
+    @inject NavigationManager NavigationManager
+
+    private string descripcion;
+    private int idEspecialidad;
+    private List<Especialidad> especialidades = new List<Especialidad>();
+
+    private readonly HttpClient http = new()
+        {
+            BaseAddress = new Uri("http://localhost:5297")
+        };
+
+    protected override async Task OnInitializedAsync()
+    {
+        var plan = await http.GetFromJsonAsync<Plan>($"planes/{id}");
+
+        especialidades = await http.GetFromJsonAsync<List<Especialidad>>("especialidades");
+
+        descripcion = plan.Descripcion;
+        idEspecialidad = plan.Especialidad.Id;
+    }
+
+    private async void Modificar()
+    {
+        var plan = new Plan()
+            {
+                Id = Convert.ToInt32(id),
+                Descripcion = descripcion,
+                Especialidad = new Especialidad()
+                {
+                    Id = idEspecialidad
+                }
+            };
+
+        var response = await http.PutAsJsonAsync($"planes/{id}", plan);
+        NavigationManager.NavigateTo("/listadoplan");
+        
+    }
+
+
+}

@@ -1,0 +1,59 @@
+﻿@page "/altaplan"
+@using Entities
+
+
+<h3>Alta de Plan</h3>
+
+<form @onsubmit="Enviar">
+    <input placeholder="Descripcion" @bind="desc" />
+    <select @bind="idEspecialidad">
+        <option selected hidden>Seleccione una especialidad</option>
+        @foreach (var e in especialidades)
+        {
+            <option value="@e.Id">@e.Descripcion</option>
+        }
+    </select>
+    <button type="submit">Agregar</button>
+</form>
+
+@code {
+    @inject NavigationManager NavigationManager
+
+    [Inject]
+    private IJSRuntime JSRuntime { get; set; }
+
+    private string desc;
+    private int idEspecialidad;
+    private List<Especialidad> especialidades = new List<Especialidad>();
+
+    private readonly HttpClient http = new()
+        {
+            BaseAddress = new Uri("http://localhost:5297")
+        };
+
+    protected override async Task OnInitializedAsync()
+    {
+        especialidades = await http.GetFromJsonAsync<List<Especialidad>>("especialidades");
+    }
+
+
+    private async void Enviar()
+    {
+        var p = new Plan()
+            {
+                Descripcion = desc,
+                Especialidad = new Especialidad()
+                {
+                    Id = idEspecialidad
+                }
+            };
+
+        var response = await http.PostAsJsonAsync("planes", p);
+
+        NavigationManager.NavigateTo("/listadoplan");
+        
+       
+
+
+    }
+}

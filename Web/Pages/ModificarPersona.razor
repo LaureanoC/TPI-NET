@@ -1,0 +1,117 @@
+﻿@page "/modificarpersona/{id}"
+@using Entities
+
+<h3>Modificar persona</h3>
+
+<form @onsubmit="Modificar">
+
+    <input placeholder="Nombre" @bind="nombre" />
+    <input placeholder="Apellido" @bind="apellido" />
+    <input placeholder="Email" @bind="email" />
+    <input placeholder="Dirección" @bind="direccion" />
+    <input placeholder="Telefono" @bind="telefono" />
+    <input placeholder="Legajo" @bind="legajo" />
+    <input type="date" @bind="fecha" />
+
+    <select @bind="tipop">
+        @if(tipop.Equals("Profesor"))
+        {
+            <option value="Alumno">Alumno</option>
+            <option value="Profesor" selected>Profesor</option>
+        } else
+        {
+            <option value="Alumno" selected>Alumno</option>
+            <option value="Profesor">Profesor</option>
+        }
+    </select>
+
+    <select @bind="idplan">
+        @foreach (var plan in planes)
+        {
+            if(plan.Id == idplan)
+            {
+                <option value="@plan.Id" selected>@plan.Descripcion</option>
+            } else
+            {
+                <option value="@plan.Id">@plan.Descripcion</option>
+            }
+
+
+        }
+    </select>
+    <button type="submit">Modificar</button>
+
+</form>
+
+@code {
+
+    [Parameter]
+    public string id { get; set; }
+
+    @inject NavigationManager NavigationManager
+
+    private string nombre;
+    private string apellido;
+    private string email;
+    private string direccion;
+    private string telefono;
+    private string legajo;
+    private string tipop;
+    private int idplan;
+    private DateTime fecha;
+
+    private List<Plan> planes = new List<Plan>();
+
+    private readonly HttpClient http = new()
+        {
+            BaseAddress = new Uri("http://localhost:5297")
+        };
+
+    protected override async Task OnInitializedAsync()
+    {
+        var persona = await http.GetFromJsonAsync<Persona>($"personas/{id}");
+
+        idplan = persona.Plan.Id;
+
+        planes = await http.GetFromJsonAsync<List<Plan>>("planes");
+
+
+        nombre = persona.Nombre;
+        apellido = persona.Apellido;
+        email = persona.Email;
+        direccion = persona.Direccion;
+        telefono = persona.Telefono;
+        legajo = persona.Legajo;
+        tipop = persona.TipoPersona;
+        fecha = persona.FechaNacimiento;
+
+        
+    }
+
+    private async void Modificar()
+    {
+        var p = new Persona()
+            {
+
+                Nombre = nombre,
+                TipoPersona = tipop,
+                Apellido = apellido,
+                Email = email,
+                Direccion = direccion,
+                Telefono = telefono,
+                Legajo = legajo,
+                FechaNacimiento = fecha,
+                Plan = new Plan()
+                {
+                    Id = idplan
+                }
+
+            };
+
+        await http.PutAsJsonAsync($"personas/{id}", p);
+        NavigationManager.NavigateTo("/listadopersona");
+
+    }
+
+
+}

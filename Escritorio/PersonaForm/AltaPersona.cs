@@ -60,5 +60,7 @@ namespace Escritorio.PersonaForm
 
             inputTipo.SelectedIndex = 0;
         }
+
+        
     }
 }

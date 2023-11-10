@@ -1,4 +1,5 @@
-﻿using Entities;
+﻿using Dtos;
+using Entities;
 using Escritorio.PlanForm;
 using System;
 using System.Collections.Generic;
@@ -22,7 +23,7 @@ namespace Escritorio.PersonaForm
 
         public async Task listar()
         {
-            var personas = await _httpClient.GetFromJsonAsync<IEnumerable<Persona>>("personas");
+            var personas = await _httpClient.GetFromJsonAsync<IEnumerable<PersonaDto>>("personas");
             this.dataPersona.DataSource = personas;
         }
 
